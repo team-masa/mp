@@ -5,23 +5,23 @@ function App() {
 
     {
       path: "/",
-      element: ,
+
     },
     {
       path: "/",
-      element: ,
+
     },
     {
       path: "/",
-      element: ,
+
     },
     {
       path: "/",
-      element: ,
+
     },
     {
       path: "/",
-      element: ,
+
     },
 
   ]);
