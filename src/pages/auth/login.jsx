@@ -1,5 +1,5 @@
 // src/pages/auth/signIn.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Mail, Lock } from 'lucide-react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
@@ -8,12 +8,20 @@ import { useNavigate } from "react-router-dom";
 import { apiLogin } from '../../services/auth';
 
 const Login = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  console.log(isSubmitting);
 
-  const { register, handleSubmit, formState: { errors } } = useForm();  
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();  
+const [showPassword, setShowPassword] = useState(false);
+const togglePasswordVisibility = () => {
+  setShowPassword(!showPassword);
+};
 
   const onSubmit = async (data) => {
     console.log(data);
+    setIsSubmitting(true)
+    console.log(isSubmitting)
     // Backend call here
     try {
       const res = await apiLogin({
@@ -21,9 +29,15 @@ const Login = () => {
         password: data.password
       });
       console.log("Response: ", res.data);
+      navigate("/dashboard")
+      setIsSubmitting(false)
       
     } catch (error) {
       console.log(error);
+    }
+
+    finally{
+      setIsSubmitting(false)
     }
   };
 
@@ -66,12 +80,15 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-2 bg-[#F50081] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300" onClick={()=> Navigate('/dashboard')}
+              className="w-full py-2 bg-[#F50081] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300" onClick={()=> navigate('/dashboard')}
+              
             >
-              Log In
+              {isSubmitting ? "Loading..." : "Login"}
+              
+              
             </button>
             <p className="text-sm text-center text-white/60 dark:text-gray-600">
-              Don’t have an account? <a href="#" className="text-[#F50081] hover:underline" onClick={()=> Navigate('/signup')}>Sign up!</a>
+              Don’t have an account? <a href="#" className="text-[#F50081] hover:underline" onClick={()=> navigate('/signup')}>Sign up!</a>
             </p>
             <div className="flex justify-center space-x-4 mt-4">
               <a href="#" className="text-white/60 dark:text-gray-600 hover:text-[#F50081]">
