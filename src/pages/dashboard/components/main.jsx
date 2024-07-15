@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [user, setUser] = useState({
     name: 'John Doe',
     email: 'john.doe@example.com',
+    username: 'johnd',
     avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
     skills: [
       { name: 'Web Development', percentage: 85 },
@@ -38,6 +39,7 @@ const Dashboard = () => {
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
           <div className="container mx-auto px-6 py-8">
             <h3 className="text-gray-700 text-3xl font-medium">Welcome, {user.name}</h3>
+            <p className="mb-6">Here you can manage your profile, experiences, achievements, skills, and more.</p>
             <QuickAccess items={user.recentItems.slice(0, 3)} />
             <PortfolioFolders />
             <div className="mt-8 flex flex-wrap">

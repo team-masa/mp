@@ -23,7 +23,7 @@ const Header = ({ user, onEditProfile }) => {
           src={user.avatar}
           alt={user.name}
         />
-        <span className="text-sm font-medium text-gray-700 mr-2">{user.name}</span>
+        <span className="text-sm font-medium text-gray-700 mr-2">{user.username}</span>
         <button onClick={onEditProfile}>
           <Edit className="h-5 w-5 text-gray-500" />
         </button>

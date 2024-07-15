@@ -4,6 +4,9 @@ import Landing from "./pages/landing";
 import SignIn from "./pages/auth/signIn";
 import SignUp from "./pages/auth/signUp";
 import Dashboard from "./pages/dashboard/components/main";
+import Experiences from "./pages/dashboard/components/experiences";
+import SettingsPage from "./pages/dashboard/components/settings";
+
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />
+  },
+  {
+    path: "/experience",
+    element: <Experiences />
+  },
+  {
+    path: "/settings",
+    element: <SettingsPage /> 
   },
 ]);
 
