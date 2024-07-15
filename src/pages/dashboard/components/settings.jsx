@@ -20,7 +20,7 @@ const SettingsPage = () => {
           </div>
           <ul className="flex-1 space-y-2">
           <SidebarItem icon={<MenuIcon />} text="Main Dashboard" link="/dashboard" expanded={expanded} />
-            <SidebarItem icon={<User />} text="Edit Profile" link="#" expanded={expanded} active={true} />
+            <SidebarItem icon={<User />} text="Edit Profile" link="/settings/profile" expanded={expanded} active={true} />
             <SidebarItem icon={<Info />} text="Personal Info" link="#" expanded={expanded} />
             <SidebarItem icon={<Lock />} text="Account Management" link="#" expanded={expanded} />
             <SidebarItem icon={<Mail />} text="Email Updates" link="#" expanded={expanded} />

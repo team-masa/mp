@@ -6,6 +6,7 @@ import SignUp from "./pages/auth/signUp";
 import Dashboard from "./pages/dashboard/components/main";
 import Experiences from "./pages/dashboard/components/experiences";
 import SettingsPage from "./pages/dashboard/components/settings";
+import EditProfileModal from "./pages/dashboard/components/editProfileModal";
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/settings",
     element: <SettingsPage /> 
+  },
+  {
+    path: "/settings/profile",
+    element: <EditProfileModal /> 
   },
 ]);
 

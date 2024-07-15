@@ -1,6 +1,7 @@
+// Sidebar.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronFirst, ChevronLast, MoreVertical, Home, Folder, Star, Clock, Settings, LogOut } from 'lucide-react';
+import { ChevronFirst, ChevronLast, MoreVertical, Home, Folder, Star, Clock, Settings } from 'lucide-react';
 
 const Sidebar = () => {
   const [expanded, setExpanded] = useState(true);
@@ -24,10 +25,10 @@ const Sidebar = () => {
 
         <ul className="flex-1 px-3">
           <SidebarItem icon={<Home size={24} />} text="Home" link="/" expanded={expanded} />
-          <SidebarItem icon={<Folder size={24} />} text="Projects" link="/projects" expanded={expanded} />
-          <SidebarItem icon={<Star size={24} />} text="Skills" link="/skills" expanded={expanded} />
-          <SidebarItem icon={<Clock size={24} />} text="Experience" link="/experience" expanded={expanded} />
-          <SidebarItem icon={<Settings size={24} />} text="Settings" link="/settings" expanded={expanded} />
+          <SidebarItem icon={<Folder size={24} />} text="Projects" link="/dashboard/projects" expanded={expanded} />
+          <SidebarItem icon={<Star size={24} />} text="Skills" link="/dashboard/skills" expanded={expanded} />
+          <SidebarItem icon={<Clock size={24} />} text="Experience" link="/dashboard/experience" expanded={expanded} />
+          <SidebarItem icon={<Settings size={24} />} text="Settings" link="/dashboard/settings" expanded={expanded} />
         </ul>
 
         <div className="border-t border-[#565470] p-3">
