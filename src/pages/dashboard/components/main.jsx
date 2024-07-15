@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from './sidebar.jsx';
+import Sidebar from '../../../components/sidebar.jsx';
 import Header from './header.jsx';
 import QuickAccess from './quickAccess.jsx';
 import PortfolioFolders from './portfolioFolders.jsx';
