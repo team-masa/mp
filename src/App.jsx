@@ -1,9 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
-import Preview from "./pages/preview";
+
 import Landing from "./pages/landing";
 import SignIn from "./pages/auth/signIn";
 import SignUp from "./pages/auth/signUp";
+import Preview from "./pages/Preview";
 function App() {
   const router = createBrowserRouter([
 
@@ -16,6 +17,7 @@ function App() {
       path: "/preview",
       element: <Preview />
     },
+   
     {
       path: "/",
       element: <Landing />
@@ -35,5 +37,6 @@ function App() {
   return <RouterProvider router={router} />;
 
 }
+
 
 export default App
