@@ -12,16 +12,16 @@ const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm();  
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    // Backend api here
+    // Backend call here
     try {
-      const res = apiLogin({
+      const res = await apiLogin({
         email: data.email,
         password: data.password
-      })
-      console.log("First: ", res);
-      console.log("Second: I got called");
+      });
+      console.log("Response: ", res.data);
+      
     } catch (error) {
       console.log(error);
     }
