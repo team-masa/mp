@@ -5,15 +5,26 @@ import { Mail, Lock } from 'lucide-react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 import Pink from '../../assets/images/signin.png';
 import { useNavigate } from "react-router-dom";
+import { apiLogin } from '../../services/auth';
 
-const SignIn = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm();  
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    // Backend api here
+    // Backend call here
+    try {
+      const res = await apiLogin({
+        email: data.email,
+        password: data.password
+      });
+      console.log("Response: ", res.data);
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -83,4 +94,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;
