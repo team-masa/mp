@@ -1,5 +1,5 @@
 // src/pages/dashboard/components/HomeContent.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { apiGetSkills } from '../../../services/skill';
 import { apiGetAchievements } from '../../../services/achievements';
 import { apiGetProjects } from '../../../services/projects';
