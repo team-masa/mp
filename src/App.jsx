@@ -2,8 +2,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Preview from './pages/preview';
 import Landing from './pages/landing';
-import SignIn from './pages/auth/signIn';
-import SignUp from './pages/auth/signUp';
 import Dashboard from './pages/dashboard/components/main';
 import HomeContent from './pages/dashboard/components/homeContent';
 import ProjectsContent from './pages/dashboard/components/projectsContent';
@@ -23,6 +21,9 @@ import SettingsPage, {
   HelpContent
 } from './pages/dashboard/components/settings';
 
+import Login from "./pages/auth/login";
+import SignUp from "./pages/auth/signUp";
+import Preview from "./pages/preview";
 
 const router = createBrowserRouter([
   {
@@ -75,4 +76,5 @@ function App() {
   return <RouterProvider router={router} />;
 }
 
-export default App;
+
+export default App
