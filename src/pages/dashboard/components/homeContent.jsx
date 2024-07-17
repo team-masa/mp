@@ -1,8 +1,59 @@
 // src/pages/dashboard/components/HomeContent.jsx
-import React from 'react';
-// import Header from './Header';
+import React, { useEffect } from 'react';
+import { apiGetSkills } from '../../../services/skill';
+import { apiGetAchievements } from '../../../services/achievements';
+import { apiGetProjects } from '../../../services/projects';
+import { apiGetVolunteering } from '../../../services/volunteering';
+import { apiGetEducation } from '../../../services/education';
+import { apiGetExperiences } from '../../../services/experiences';
 
 const HomeContent = () => {
+
+  const [data, setData] = useState({
+    skills: 0,
+    projects: 0,
+    achievements: 0,
+    volunteering: 0,
+    education: 0,
+    experiences: 0,
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getData = async () => {
+    setIsLoading(true)
+    try {
+      const [totalSkills, totalAchievements, totalProjects, totalVolunteering, totalEducation, totalExperiences] = await Promise.all([
+        apiGetSkills,
+        apiGetAchievements,
+        apiGetProjects,
+        apiGetVolunteering,
+        apiGetEducation,
+        apiGetExperiences
+      ]);
+
+      const newData = {
+        skills: totalSkills.length,
+        projects: totalProjects.length,
+        achievements: totalAchievements.length,
+        volunteering: totalVolunteering.length,
+        education: totalEducation.length,
+        experiences: totalExperiences.length,
+      }
+
+      setData(newData);
+
+    } catch (error) {
+      console.log(error)
+    } finally {
+    setIsLoading(false);
+  }
+  };
+
+useEffect(() => {
+  // getData();
+}, [])
+
   const user = {
     avatar: 'https://ui-avatars.com/api/?background=C69749&color=fff&name=Jane+Doe',
     name: 'Jane Doe',
@@ -47,12 +98,12 @@ const HomeContent = () => {
           <div className="mt-6 md:mt-0 md:w-1/3 bg-[#1F2029] p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-[#C69749]">Quick Links</h2>
             <ul className="space-y-4">
-            <li>
+              <li>
                 <a href="/education" className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">
                   Education
                 </a>
               </li>
-            <li>
+              <li>
                 <a href="/experience" className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">
                   Experience
                 </a>
@@ -77,9 +128,9 @@ const HomeContent = () => {
                   Volunteering
                 </a>
               </li>
-            
-              
-            
+
+
+
             </ul>
           </div>
         </div>

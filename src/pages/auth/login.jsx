@@ -31,8 +31,9 @@ const Login = () => {
         password: data.password
       });
       console.log("Response: ", res.data);
+      localStorage.setItem("accessToken", res.data.accessToken)
 
-      toast.success(res.data)
+      toast.success(res.data.message)
 
       setTimeout(() => {
         navigate("/dashboard")
@@ -89,7 +90,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-2 bg-[#F50081] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300" 
+              className="w-full py-2 bg-[#F50081] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300 flex justify-center" 
 
             >
               {isSubmitting ? <InfinitySpin /> : "Login"}
