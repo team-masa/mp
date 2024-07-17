@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .glow{
     transition: all 0.3s ease-in-out;
 }
@@ -15,3 +13,4 @@
 .img_glow{
     box-shadow: 0 0 55px;
 }
+

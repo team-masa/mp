@@ -6,9 +6,11 @@ export default {
   ],
   theme: {
     extend: {
-      colors:{
-        
-      }
+      color: {
+        pink: '#F50081',
+        blue: '#3F3D56',
+        purple: '#8d0f4e'
+      },
     },
   },
   plugins: [],

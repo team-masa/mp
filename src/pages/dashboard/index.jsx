@@ -1,9 +1,14 @@
-import React from 'react'
+//src/pages/dashboard/index.jsx
+import SideBar from './components/sidebar';
+import Main from './components/main';
 
-const Dashboard = () => {
+function App() {
   return (
-    <div>Dashboard</div>
-  )
+    <div className="flex min-h-screen bg-gray-100">
+      <SideBar />
+      <Main />
+    </div>
+  );
 }
 
-export default Dashboard
+export default App;
