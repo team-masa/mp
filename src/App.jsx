@@ -4,10 +4,9 @@ import Dashboard from "./pages/dashboard";
 import Landing from "./pages/landing";
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signUp";
-import Preview from "./pages/Preview";
+import Preview from "./pages/preview";
 function App() {
   const router = createBrowserRouter([
-
 
     {
       path: "/dashboard",
@@ -23,7 +22,7 @@ function App() {
       element: <Landing />
     },
     {
-      path: "/Login",
+      path: "/login",
       element: <Login />
 
     },
