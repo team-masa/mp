@@ -1,5 +1,5 @@
+//src/pages/dashboard/index.jsx
 import SideBar from './components/sidebar';
-import RightSideBar from './components/rightsidebar';
 import Main from './components/main';
 
 function App() {

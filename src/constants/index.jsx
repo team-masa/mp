@@ -1,4 +1,5 @@
-import { Home, User, Info, Lock, Mail, Shield, Share2, Heart, HelpCircle } from 'lucide-react';
+// src/constants/index.jsx
+import { Home, User, Info, Lock, Mail, Shield, Share2, Star, Book, Award, Settings, Heart, HelpCircle, Briefcase, Globe,  } from 'lucide-react';
 
 const K = {
   NAVLINKS: [
@@ -6,24 +7,28 @@ const K = {
     { name: 'Login', path: '/login', icon: User },
     { name: 'Sign Up', path: '/signup', icon: User },
   ],
-  DASHLINKS: [
-    { name: 'Home', path: '/', icon: Home },
-    { name: 'Projects', path: '/dashboard/projects', icon: User },
-    { name: 'Skills', path: '/dashboard/skills', icon: Info },
-    { name: 'Experience', path: '/dashboard/experience', icon: Lock },
-    { name: 'Achievements', path: '/dashboard/achievements', icon: Mail },
-    { name: 'Settings', path: '/dashboard/settings', icon: Shield },
+
+  DASHBOARD_LINKS: [
+    { path: '/dashboard/home', name: 'Home', icon: Home },
+    { path: '/dashboard/education', name: 'Education', icon: Book },
+    { path: '/dashboard/projects', name: 'Projects', icon: Globe },
+    { path: '/dashboard/skills', name: 'Skills', icon: Star },
+    { path: '/dashboard/experiences', name: 'Experience', icon: Briefcase },
+    { path: '/dashboard/achievements', name: 'Achievements', icon: Award },
+    { path: '/dashboard/volunteering', name: 'Volunteering', icon: Heart },
+    { path: '/dashboard/settings', name: 'Settings', icon: Settings }
   ],
+
   SETTINGS: [
-    { name: 'Main Dashboard', path: '/settings', icon: Home },
-    { name: 'Edit Profile', path: '/settings/edit-profile', icon: User },
-    { name: 'Personal Info', path: '/settings/personal-info', icon: Info },
-    { name: 'Account Management', path: '/settings/account', icon: Lock },
-    { name: 'Email Updates', path: '/settings/email', icon: Mail },
-    { name: 'Privacy', path: '/settings/privacy', icon: Shield },
-    { name: 'Social Media', path: '/settings/social', icon: Share2 },
-    { name: 'Interests', path: '/settings/interests', icon: Heart },
-    { name: 'Help', path: '/settings/help', icon: HelpCircle },
+    { name: 'Edit Profile', path: '/dashboard/settings/profile', icon: User },
+    { name: 'Personal Info', path: '/dashboard/settings/personal', icon: Info },
+    { name: 'Account Management', path: '/dashboard/settings/account', icon: Lock },
+    { name: 'Email Updates', path: '/dashboard/settings/email', icon: Mail },
+    { name: 'Privacy', path: '/dashboard/settings/privacy', icon: Shield },
+    { name: 'Social Media', path: '/dashboard/settings/socials', icon: Share2 },
+    { name: 'Interests', path: '/dashboard/settings/interests', icon: Heart },
+    { name: 'Help', path: '/dashboard/settings/help', icon: HelpCircle },
+    { name: 'Main Dashboard', path: '/dashboard', icon: Globe },
   ],
 };
 
