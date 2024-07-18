@@ -16,9 +16,9 @@ const Skills = [
 
 const MySkills = () => {
   return (
-    <div id='Skills' className="flex flex-col items-center py-10 bg-slate-900">
-      <h1 className="font-bold text-2xl mb-10 text-white">MY SKILLS</h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+    <div id='Skills' className="flex flex-col items-center py-24 bg-slate-800">
+      <h1   data-aos="fade-up" className="font-bold text-2xl mb-10 text-white">MY SKILLS</h1>
+      <div   data-aos="fade-down" className="grid grid-cols-2 md:grid-cols-4 gap-10">
         {Skills.map((skill, index) => (
           <div key={index} className="flex flex-col items-center">
             <VisibilitySensor partialVisibility offset={{ bottom: 200 }}>
@@ -27,13 +27,12 @@ const MySkills = () => {
                 return (
                   <div className="w-24 h-24 mb-3">
                     <CircularProgressbar
-                      data-aos="fade-right"
-                      value={percentage}
+                    value={percentage}
                       text={`${percentage}%`}
-                      styles={buildStyles({
+                        styles={buildStyles({
                         textSize: '24px',
-                        pathColor: `#f50057`,
-                        textColor: '#F87171',
+                        pathColor: `#735F32`,
+                        textColor: '#735F32',
                         trailColor: '#d1d5db',
                       })}
                     />
