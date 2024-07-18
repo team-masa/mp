@@ -23,7 +23,7 @@ import SettingsPage, {
 
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signUp";
-import Preview from "./pages/preview";
+
 
 const router = createBrowserRouter([
   {
@@ -62,8 +62,8 @@ const router = createBrowserRouter([
     element: <Landing />
   },
   {
-    path: "/signin",
-    element: <SignIn />
+    path: "/login",
+    element: <Login />
   },
   {
     path: "/signup",

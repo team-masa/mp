@@ -32,11 +32,11 @@ const Login = () => {
       });
       console.log("Response: ", res.data);
 
-      toast.success(res.data)
+      toast.success(res.data.message)
 
       setTimeout(() => {
         navigate("/dashboard")
-      }, 5000)
+      }, 2000)
 
 
       setIsSubmitting(false)
