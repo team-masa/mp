@@ -65,7 +65,7 @@ const SignUp = () => {
       userName: data.userName,
       email: data.email,
       password: data.password,
-      confirmedPassword: data.password
+      confirmPassword: data.password
     };
 
     if (data.otherNames) {
@@ -74,7 +74,7 @@ const SignUp = () => {
 
     try {
       const res = await apiSignUp(payLoad);
-      toast.success(res.data);
+      toast.success(res.data.message);
       setTimeout(() => {
         navigate("/login");
       }, 2000);

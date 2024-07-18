@@ -24,6 +24,7 @@ import SettingsPage, {
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signUp";
 
+
 const router = createBrowserRouter([
   {
     path: "/dashboard",
