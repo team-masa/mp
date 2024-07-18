@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import SkillBadge from '../components/SkillBadge';
 import { Plus, X } from 'lucide-react';
+import { useEffect } from 'react';
+import { apiAddSkill, apiGetSkills } from '../../../services/skill';
+import Pageloader from '../../../components/pageloader';
+import { useForm } from 'react-hook-form';
+import { InfinitySpin } from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 const predefinedSkills = [
-  'JavaScript', 'React', 'Node.js', 'CSS', 'Tailwind CSS', 'HTML', 'Python', 'Django', 'Java', 'Spring Boot', 'PHP', 'Laravel', 'Ruby', 'Rails', 'TypeScript', 'Angular', 'Vue.js', 'MongoDB', 'MySQL', 'PostgreSQL'
+  'Beginner', 'Intermediate', 'Advanced', 'Expert'
 ];
 
 const SkillsContent = () => {
@@ -15,6 +21,9 @@ const SkillsContent = () => {
   const [newSkill, setNewSkill] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState('');
+  const [isLoading, setIsLoading] = useState()
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
 
   // Handle adding a new skill
   const handleAddSkill = () => {
@@ -26,8 +35,16 @@ const SkillsContent = () => {
   };
 
   // Handle removing a skill
-  const handleRemoveSkill = (skillToRemove) => {
+  const handleRemoveSkill = async (skillToRemove) => {
     setSkills(skills.filter(skill => skill.name !== skillToRemove));
+   try {
+    const res = await apiAddSkill(_id)
+    console.log(res.data)
+    toast.success(res.data.message)
+   } catch (error) {
+    console.log(error)
+    toast.error("An error occured")
+   }
   };
 
   // Handle adding a predefined skill
@@ -37,6 +54,45 @@ const SkillsContent = () => {
     }
     setSelectedSkill('');
     setIsModalOpen(false);
+  };
+
+  const fetchSkills = async () => {
+    try {
+
+      const res = await apiGetSkills();
+      console.log(res.data)
+      setSkills(res.data.Skills)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  };
+
+  useEffect(() => {
+    fetchSkills()
+  }, []);
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    setIsSubmitting(true)
+
+    try {
+      const res = await apiAddSkill({
+        name: data.name,
+        levelOfProficiency: data.proficiency
+      });
+
+      console.log(res.data);
+      toast.success(res.data.message)
+    } catch (error) {
+      console.log(error)
+      toast.error("An error occured")
+    } finally {
+      setIsSubmitting(false)
+    }
   };
 
   return (
@@ -56,56 +112,68 @@ const SkillsContent = () => {
         </button>
       </header>
 
-      {/* Skills List */}
-      <div className="flex flex-wrap gap-4 justify-center mb-8">
-        {skills.map(skill => (
-          <div key={skill.name} className="relative flex items-center px-4 py-2">
-            <SkillBadge skill={skill} />
-            <button
-              onClick={() => handleRemoveSkill(skill.name)}
-              className="absolute top-0 right-0 bg-[#FF6B6B] text-[#000000] p-2 rounded-full hover:bg-[#FF4C4C] transform hover:scale-110 transition duration-300"
-              aria-label={`Remove ${skill.name}`}
-            >
-              <X size={16} />
-            </button>
-          </div>
-        ))}
-      </div>
+      {isLoading ? <Pageloader /> :
+        <div>
 
-      {/* Add Skill Modal */}
+          {
+            skills.length == 0 ? <p>No skill added yet</p> :
+              <div className="flex flex-wrap gap-4 justify-center mb-8">
+                {skills.map(skill => (
+                  <div key={skill.name} className="relative flex items-center px-4 py-2">
+                    <SkillBadge skill={skill} />
+                    <button
+                      onClick={() => handleRemoveSkill(skill.name)}
+                      className="absolute top-0 right-0 bg-[#FF6B6B] text-[#000000] p-2 rounded-full hover:bg-[#FF4C4C] transform hover:scale-110 transition duration-300"
+                      aria-label={`Remove ${skill.name}`}
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+          }
+        </div>
+      }
+
+
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-30">
           <div className="bg-[#282A3A] p-8 rounded-lg shadow-xl max-w-md mx-auto relative">
             <h2 className="text-2xl font-bold mb-6 text-[#C69749] text-center">Add New Skill</h2>
-            <form onSubmit={(e) => { e.preventDefault(); handleAddSkill(); }}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
                 <label className="block text-gray-300 mb-2">Skill Name</label>
                 <input
                   type="text"
-                  value={newSkill}
-                  onChange={(e) => setNewSkill(e.target.value)}
+                  // value={newSkill}
+                  // onChange={(e) => setNewSkill(e.target.value)}
+                  {...register("name", { required: "name is required" })}
                   className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-300 mb-2">Or Choose a Predefined Skill</label>
+                <label className="block text-gray-300 mb-2">Choose level of Proficiency</label>
                 <select
-                  value={selectedSkill}
-                  onChange={(e) => setSelectedSkill(e.target.value)}
+
+                  {...register("proficiency", { required: "proficiency is required" })}
+                  // value={selectedSkill}
+                  // onChange={(e) => setSelectedSkill(e.target.value)}
                   className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 >
                   <option value="">Select a skill...</option>
                   {predefinedSkills.map(skill => (
                     <option key={skill} value={skill}>{skill}</option>
                   ))}
+
                 </select>
+
                 <button
                   type="button"
                   onClick={() => handleSelectSkill(selectedSkill)}
                   disabled={!selectedSkill}
                   className="bg-[#C69749] text-[#000000] py-2 px-4 rounded-lg hover:bg-[#A67C41] transform hover:scale-105 transition duration-300 mt-4 w-full disabled:bg-gray-600 disabled:cursor-not-allowed"
                 >
-                  Add Predefined Skill
+                Level of Proficiency
                 </button>
               </div>
               <div className="flex justify-between mt-6">
@@ -120,13 +188,17 @@ const SkillsContent = () => {
                   type="submit"
                   className="bg-[#C69749] text-[#000000] py-2 px-4 rounded-lg hover:bg-[#A67C41] transform hover:scale-105 transition duration-300"
                 >
-                  Add Skill
+                  {isSubmitting ? <InfinitySpin /> : "Add Skill"}
+
                 </button>
               </div>
             </form>
           </div>
         </div>
+
       )}
+
+
     </div>
   );
 };
