@@ -15,32 +15,26 @@ import Volunteering from './components/volunteering'
 const Preview = () => {
 
   return (
-   
-   
-          <div>
-              <Nav />
-              <Banner />
-              <About />
-              <MySkills />
-              <Experience />
-              <Achievement/>
-              <Project />
-              <Volunteering/>
-              <Contact />
-              <Footer />
+
+
+    <div>
+      <Nav />
+      <Banner />
+      <About />
+      <MySkills />
+      <Experience />
+      <Achievement />
+      <Project />
+      <Volunteering />
+      <Contact />
+      <Footer />
+    </div>
 
 
 
 
-              
 
-            </div>
-      
-      
-      
-    
-    
-    
+
   )
 }
 

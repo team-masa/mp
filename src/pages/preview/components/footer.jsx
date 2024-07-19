@@ -7,12 +7,12 @@ const Footer = () => {
       <div className='container mx-auto grid grid-cols-1 md:grid-cols-4 gap-4'>
         <div className='mb-4 md:mb-0'>
           <span className='text-[22px] font-semibold text-[#735F32] py-2 uppercase'>Belkins</span>
-          <p className='text-[16px] my-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, illum voluptate accusantium aperiam assumenda dignissimos mollitia illo eius sed.</p>
+          <p className='text-[16px] my-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, illum voluptate accusantium dignissimos mollitia illo eius sed.</p>
         </div>
 
         <div>
           <h2 className='text-[22px] font-semibold text-[#735F32] py-2 uppercase'>SERVICES</h2>
-          <ul className='text-[16px] my-4'>
+          <ul className='text-[16px] '>
             <li className='my-2'>Web Design</li>
             <li className='my-2'>Web Development</li>
             <li className='my-2'>SEO</li>

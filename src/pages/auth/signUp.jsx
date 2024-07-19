@@ -87,7 +87,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full h-full absolute inset-0 bg-red-100">
+    <div className="flex items-center justify-center w-full h-full absolute inset-0 bg-[#282A3A] bg-opacity-90">
       <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-4xl bg-white p-8 shadow-xl rounded-md">
         <img src={unDraw} alt="Sign Up Illustration" className="w-full md:w-1/2 h-auto object-contain" />
         <div className="w-full md:w-1/2 flex flex-col justify-center p-4">
@@ -100,7 +100,7 @@ const SignUp = () => {
                   id="first-name"
                   type="text"
                   className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-600 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white"
-                  placeholder="First name"
+                  placeholder="First name"th
                   {...register("firstName", { required: "First name is required", minLength: { value: 4, message: "First name must be at least 4 characters long" } })}
                 />
                 {errors.firstName && (<p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>)}
@@ -190,7 +190,7 @@ const SignUp = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#F50081] hover:bg-[#3F3D56] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#735F32] hover:bg-[#3F3D56] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 {isSubmitting ? <Triangle /> : "Sign Up"}
               </button>

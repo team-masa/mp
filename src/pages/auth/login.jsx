@@ -39,7 +39,7 @@ const Login = () => {
       }, 2000)
 
 
-      setIsSubmitting(false)
+      setIsSubmitting(signupfalse)
 
     } catch (error) {
       console.log(error);
@@ -61,8 +61,8 @@ const Login = () => {
       </div>
       <div className="flex-1 flex items-center justify-center bg-[#3F3D56]">
         <div className="w-full max-w-md p-8 space-y-8">
-          <h2 className="text-5xl font-bold text-white/60 dark:text-gray-600">Welcome</h2>
-          <p className="text-base text-white/60 dark:text-gray-600">Log in to your account to continue</p>
+          <h2 className="text-5xl font-bold text-[#C69749] dark:text-[#C69749]">Welcome</h2>
+          <p className="text-base text-[#C69749] dark:text-[#C69749]">Log in to your account to continue</p>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="relative">
               <Mail className="absolute left-3 top-3 text-gray-400" />
@@ -85,11 +85,11 @@ const Login = () => {
               {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
             </div>
             <div className="flex items-center justify-between">
-              <a href="#" className="text-sm text-[#F50081] hover:underline">Forgot your password?</a>
+              <a href="#" className="text-sm text-[#C69749] hover:underline">Forgot your password?</a>
             </div>
             <button
               type="submit"
-              className="w-full py-2 bg-[#F50081] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300" 
+              className="w-full py-2 bg-[#C69749] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300" 
 
             >
               {isSubmitting ? <InfinitySpin /> : "Login"}
@@ -97,16 +97,16 @@ const Login = () => {
 
             </button>
             <p className="text-sm text-center text-white/60 dark:text-gray-600">
-              Don’t have an account? <a href="#" className="text-[#F50081] hover:underline" onClick={() => navigate('/signup')}>Sign up!</a>
+              Don’t have an account? <a href="#" className="text-[#C69749] hover:underline" onClick={() => navigate('/signup')}>Sign up!</a>
             </p>
             <div className="flex justify-center space-x-4 mt-4">
-              <a href="#" className="text-white/60 dark:text-gray-600 hover:text-[#F50081]">
+              <a href="#" className="text-white/60 dark:text-gray-600 hover:text-[#]">
                 <FaFacebookF />
               </a>
-              <a href="#" className="text-white/60 dark:text-gray-600 hover:text-[#F50081]">
+              <a href="#" className="text-white/60 dark:text-gray-600 hover:text-[#]">
                 <FaTwitter />
               </a>
-              <a href="#" className="text-white/60 dark:text-gray-600 hover:text-[#F50081]">
+              <a href="#" className="text-white/60 dark:text-gray-600 hover:text-[#]">
                 <FaLinkedinIn />
               </a>
             </div>

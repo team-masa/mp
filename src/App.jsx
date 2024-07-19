@@ -23,6 +23,7 @@ import SettingsPage, {
 
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signUp";
+import ContactContent from './pages/landing/components/contact';
 
 
 const router = createBrowserRouter([
@@ -54,12 +55,16 @@ const router = createBrowserRouter([
         ]
       },
   {
-    path: "/preview",
+    path: "/preview/mabel",
     element: <Preview />
   },
   {
     path: "/",
     element: <Landing />
+  },
+  {
+    path: "/contact",
+    element: <ContactContent />
   },
   {
     path: "/login",
