@@ -53,7 +53,7 @@ const Nav = () => {
     <nav className='lg:fixed bg-slate-900 top-0 left-0 right-0 z-50'>
       <div className='h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-4 border-b border-slate-800'>
         <div className='flex items-center flex-1'>
-          <Link to="Home" spy={true} smooth={true}><span className='text-3xl font-bold cursor-pointer'>Maybell</span></Link>
+          <a href="/"><span className='text-3xl font-bold cursor-pointer'>Maybell</span></a>
         </div>
         <div className='lg:flex md:flex lg:flex-1 items-center justify-end font-normal hidden'>
           <div className='flex-10 text-white'>

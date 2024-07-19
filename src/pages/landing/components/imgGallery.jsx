@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import AaronImg from "../../../assets/images/aaron.jpg";
+import SallyImg from "../../../assets/images/sally.jpg";
+import MayImg from "../../../assets/images/may.jpg";
+import AbImg from "../../../assets/images/abena.jpg";
 
 const projects = [
-  { id: 1, title: "Aaron", role: "FULLSTACK DEVELOPER", year: 2021, image: "https://picsum.photos/seed/1/400/600" },
-  { id: 2, title: "Mabel", role: "WEBSITE & DESIGN SYSTEM", year: 2021, image: "https://picsum.photos/seed/2/400/600" },
-  { id: 3, title: "Sarah", role: "BRANDING & PRINT", year: 2019, image: "https://picsum.photos/seed/3/400/600" },
-  { id: 4, title: "Abena", role: "UI DESIGN", year: 2022, image: "https://picsum.photos/seed/4/400/600" },
+  { id: 1, title: "Aaron", role: "FULLSTACK DEVELOPER", year: 2021, image: AaronImg },
+  { id: 3, title: "Sarah", role: "BACKEND DEVELOPER", year: 2019, image: SallyImg },
+  { id: 2, title: "Mabel", role: "WEBSITE & DESIGN SYSTEM", year: 2021, image: MayImg },
+  { id: 4, title: "Abena", role: "UI DESIGN", year: 2022, image: AbImg },
 ];
 
 const ImageGallery = () => {
@@ -54,11 +58,11 @@ const ImageGallery = () => {
               <div className="flex items-center justify-between px-16 max-w-6xl mx-auto">
                 <h2 className="text-6xl font-serif w-1/3 text-[#C69749]">{project.title}</h2>
                 <div className="w-1/2 relative">
-                  <Link to="/preview">
+                  <Link to={"/preview/mabel"}>
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-auto transform rotate-6 transition-transform duration-300 hover:rotate-2"
+                      className="w-[350px] h-auto transform rotate-6 transition-transform duration-300 hover:rotate-2"
                     />
                   </Link>
                   <div className="absolute bottom-3 right-3 text-sm p-2 bg-[#000000] bg-opacity-80 text-[#C69749]">
