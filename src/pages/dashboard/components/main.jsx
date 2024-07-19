@@ -141,7 +141,7 @@ const Dashboard = () => {
   const handleLogout = () => {
     // Add your logout logic here
     console.log('User logged out');
-    navigate('/');
+    navigate('/preview/mabel');
   };
 
   return (
