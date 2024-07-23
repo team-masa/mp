@@ -1,24 +1,15 @@
-// src/pages/dashboard/components/HomeContent.jsx
-import React from 'react';
-// import Header from './Header';
+import { Link } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+
 
 const HomeContent = () => {
-  const user = {
-    avatar: 'https://ui-avatars.com/api/?background=C69749&color=fff&name=Jane+Doe',
-    name: 'Jane Doe',
-    username: 'jane_doe',
-    email: 'jane.doe@example.com',
-  };
-
-  const handleEditProfile = () => {
-    // Profile editing logic here
-    alert('Profile has been updated!');
-  };
+  const [profile] = useOutletContext();
+  console.log("🚀 ~ Profile ~ profile:", profile);
 
   return (
     <div className=" min-h-full text-white flex flex-col pt-16">
       {/* <Header user={user} onEditProfile={handleEditProfile} /> */}
-      <main className="flex-1 px-6 py-4 max-w-full-lg mx-auto">
+      <main className="flex flex-col lg:flex-row px-6 py-4 max-w-full-lg mx-auto">
         <div className="flex flex-col md:flex-row md:space-x-6">
           {/* Main Welcome Section */}
           <div className="flex-1 bg-[#1F2029] p-6 rounded-lg shadow-lg">
@@ -47,12 +38,13 @@ const HomeContent = () => {
           <div className="mt-6 md:mt-0 md:w-1/3 bg-[#1F2029] p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-[#C69749]">Quick Links</h2>
             <ul className="space-y-4">
-            <li>
+              <li><Link to={profile ? `/preview/${profile.user.username}` : '/preview/maybell'} className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">Portfolio Preview</Link></li>
+              <li>
                 <a href="/education" className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">
                   Education
                 </a>
               </li>
-            <li>
+              <li>
                 <a href="/experience" className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">
                   Experience
                 </a>
@@ -77,14 +69,15 @@ const HomeContent = () => {
                   Volunteering
                 </a>
               </li>
-            
-              
-            
+
+
+
             </ul>
           </div>
         </div>
       </main>
     </div>
+
   );
 };
 

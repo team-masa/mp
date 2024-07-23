@@ -18,7 +18,7 @@ const volunteeringExperiences = [
   },
 ];
 
-const Volunteering = () => {
+const Volunteering = (volunteering) => {
   return (
     <section id="Volunteering"  className="bg-slate-800 py-32">
       <div className="container mx-auto px-4">

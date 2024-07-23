@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Project = () => {
+const Project = (projects) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 

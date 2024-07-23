@@ -26,6 +26,7 @@ import SignUp from "./pages/auth/signUp";
 import ContactContent from './pages/landing/components/contact';
 import AuthLayout from "./layouts/authLayout"
 import { apiGetUserDetails } from "./services/preview";
+import {toast} from "react-toastify"
 
 // import NotFound from "./pages/NotFound";
 

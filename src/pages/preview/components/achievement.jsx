@@ -18,7 +18,7 @@ const awards = [
   },
 ];
 
-const Achievement = () => {
+const Achievement = (achievements) => {
   return (
     <section id="Achievement" className="bg-slate-800 p-32">
       <div className="container mx-auto px-4">
