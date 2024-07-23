@@ -13,9 +13,9 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors } } = useForm({reValidateMode:"onBlur", mode: "all"});
+  const { register, handleSubmit, formState: { errors } } = useForm({ reValidateMode: "onBlur", mode: "all" });
   const [showPassword, setShowPassword] = useState(false);
-  
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -26,20 +26,16 @@ const Login = () => {
     // Backend call here
     try {
       const res = await apiLogin({
-       
+
         email: data.email,
         password: data.password
       });
-      console.log("Response: ", res.data);
+      localStorage.setItem("accessToken", res.data.accessToken);
 
       toast.success(res.data.message)
+      navigate("/dashboard")
 
-      setTimeout(() => {
-        navigate("/dashboard")
-      }, 2000)
-
-
-      setIsSubmitting(signupfalse)
+      
 
     } catch (error) {
       console.log(error);
@@ -89,7 +85,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-2 bg-[#C69749] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300" 
+              className="w-full py-2 bg-[#C69749] text-white rounded-md hover:bg-[#8d0f4e]/90 transition-colors duration-300"
 
             >
               {isSubmitting ? <InfinitySpin /> : "Login"}

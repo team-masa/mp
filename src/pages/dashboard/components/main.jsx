@@ -1,16 +1,41 @@
 // src/pages/dashboard/components/Dashboard.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import { useLocation, useNavigate, Outlet ,Navigate} from 'react-router-dom';
 import { Home, Briefcase, Star, Book, Award, Settings, ChevronFirst, ChevronLast, MoreVertical, LogOut } from 'lucide-react';
 import K from '../../../constants';
 import { toast } from 'react-toastify';
+import { apiGetProfile } from '../../../services/profile';
+import { getToken } from '../../../services/config';
+import { apiLogout } from '../../../services/auth';
 
 const Dashboard = () => {
   const [expanded, setExpanded] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const particlesContainerRef = useRef(null);
+  const [profile, setProfile] = useState();
+
+  const token = getToken();
+
+  const getUserProfile = async () => {
+    try {
+      const response = await apiGetProfile();
+      const userProfileData = response?.data.profile;
+      setProfile(userProfileData);
+    } catch (error) {
+      toast.error("An error occured");
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      getUserProfile();
+    }
+  }, []);
+
+  if (!token) {
+    return <Navigate to="/login" />}
 
   useEffect(() => {
     if (location.pathname === '/dashboard') {
@@ -142,7 +167,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     
     try {
-        await handleLogout();
+        await apiLogout();
         toast.success("Logged out successfully");
         navigate("/login");
       } catch (error) {
@@ -204,7 +229,7 @@ const Dashboard = () => {
         </nav>
       </aside>
       <main className="flex-1 p-8 relative z-10">
-        <Outlet /> {/* This will render the child routes */}
+        <Outlet context={[profile, setProfile]}/> {/* This will render the child routes */}
       </main>
     </div>
   );

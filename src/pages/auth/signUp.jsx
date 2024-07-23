@@ -75,9 +75,8 @@ const SignUp = () => {
     try {
       const res = await apiSignUp(payLoad);
       toast.success(res.data.message);
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
+      navigate("/login");
+
     } catch (error) {
       console.log(error);
       toast.error("An error occured")
@@ -100,7 +99,7 @@ const SignUp = () => {
                   id="first-name"
                   type="text"
                   className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-600 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white"
-                  placeholder="First name"th
+                  placeholder="First name" th
                   {...register("firstName", { required: "First name is required", minLength: { value: 4, message: "First name must be at least 4 characters long" } })}
                 />
                 {errors.firstName && (<p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>)}
@@ -132,7 +131,7 @@ const SignUp = () => {
                 <input
                   id="username"
                   type="text"
-                   className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-600 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white"
+                  className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-600 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white"
                   placeholder="Username"
                   {...register("userName", { required: "Username is required", minLength: { value: 4, message: "Username must be at least 4 characters long" } })}
                 />
@@ -165,7 +164,7 @@ const SignUp = () => {
 
                   className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-600 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white"
                   placeholder="Password"
-                  {...register("password", { required: "Password is required", minLength: { value: 8, message: "Password must be more than 8 characters" ,}, })}
+                  {...register("password", { required: "Password is required", minLength: { value: 8, message: "Password must be more than 8 characters", }, })}
                 />
                 {errors.password && (<p className="text-red-500 text-sm mt-1">{errors.password.message}</p>)}
               </div>

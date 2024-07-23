@@ -29,7 +29,7 @@ const DashboardLayout = () => {
   }, []);
 
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" />}
   // }
   // const getAvatar = () => {
   //   if (!profile) return "N/A";

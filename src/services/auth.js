@@ -1,4 +1,5 @@
 import { apiClient } from "./config";
+import { clearToken } from "./config";
 
 export const apiSignUp = async(payload) => {
     return apiClient.post("/auth/signup", payload);
