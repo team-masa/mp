@@ -11,7 +11,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTermsAgreed, setIsTermsAgreed] = useState(false);
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm({ reValidateMode: "onBlur", mode: "all" });
   const [usernameAvailable, setUsernameAvailable] = useState(false);
   const [usernameNotAvailable, setUsernameNotAvailable] = useState(false);
   const [isUsernameLoading, setIsUsernameLoading] = useState(false)
@@ -165,7 +165,7 @@ const SignUp = () => {
 
                   className="appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-600 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white"
                   placeholder="Password"
-                  {...register("password", { required: "Password is required", minLength: { value: 5, message: "Password must be at least 5 characters long" } })}
+                  {...register("password", { required: "Password is required", minLength: { value: 8, message: "Password must be more than 8 characters" ,}, })}
                 />
                 {errors.password && (<p className="text-red-500 text-sm mt-1">{errors.password.message}</p>)}
               </div>

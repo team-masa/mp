@@ -9,6 +9,10 @@ export const apiLogin = async(payload) => {
     return apiClient.post("/auth/token/login", payload);
 }
 
+export const apiLogout = async () => {
+    clearToken();
+  };
+
 export const apiCheckUserNameExists = async (userName) => {
     return apiClient.get(`/auth/${userName}`);
 }
