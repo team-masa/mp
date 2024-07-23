@@ -24,6 +24,11 @@ import SettingsPage, {
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signUp";
 import ContactContent from './pages/landing/components/contact';
+import AuthLayout from "./layouts/authLayout"
+import { apiGetUserDetails } from "./services/preview";
+
+// import NotFound from "./pages/NotFound";
+
 
 
 const router = createBrowserRouter([
@@ -54,13 +59,37 @@ const router = createBrowserRouter([
           { path: "help", element: <HelpContent /> },
         ]
       },
-  {
-    path: "/preview/mabel",
-    element: <Preview />
-  },
+      {
+        path: "preview/:username",
+        element: <Preview />,
+        loader: async ({ params }) => {
+          const username = params.username;
+          try {
+            const response = await apiGetUserDetails(username);
+            const userProfileData = response?.data.user;
+            return userProfileData;
+          } catch (error) {
+            toast.error("An error occured");
+            return null;
+          }
+        },
+      },
   {
     path: "/",
     element: <Landing />
+  },
+  {
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+    ],
   },
   {
     path: "/contact",
