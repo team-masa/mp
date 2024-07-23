@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { Home, Briefcase, Star, Book, Award, Settings, ChevronFirst, ChevronLast, MoreVertical, LogOut } from 'lucide-react';
 import K from '../../../constants';
+import { toast } from 'react-toastify';
 
 const Dashboard = () => {
   const [expanded, setExpanded] = useState(true);
@@ -138,10 +139,16 @@ const Dashboard = () => {
     };
   }, [location, navigate]);
 
-  const handleLogout = () => {
-    // Add your logout logic here
-    console.log('User logged out');
-    navigate('/preview/mabel');
+  const handleLogout = async () => {
+    
+    try {
+        await handleLogout();
+        toast.success("Logged out successfully");
+        navigate("/login");
+      } catch (error) {
+        toast.error("An error occured");
+      }
+  
   };
 
   return (
