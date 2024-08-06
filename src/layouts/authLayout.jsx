@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { getToken } from "../services/config";
+import { getDetails } from "../services/config";
 
 const AuthLayout = () => {
-  const token = getToken();
+  const {token }= getDetails();
 
   if (token) return <Navigate to="/dashboard" />;
   return (

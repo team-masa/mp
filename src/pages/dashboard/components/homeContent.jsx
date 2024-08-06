@@ -3,8 +3,8 @@ import { useOutletContext } from "react-router-dom";
 
 
 const HomeContent = () => {
-  const [profile] = useOutletContext();
-  console.log("🚀 ~ Profile ~ profile:", profile);
+  const [user] = useOutletContext();
+  console.log(user)
 
   return (
     <div className=" min-h-full text-white flex flex-col pt-16">
@@ -38,7 +38,7 @@ const HomeContent = () => {
           <div className="mt-6 md:mt-0 md:w-1/3 bg-[#1F2029] p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-[#C69749]">Quick Links</h2>
             <ul className="space-y-4">
-              <li><Link to={profile ? `/preview/${profile.user.username}` : '/preview/maybell'} className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">Portfolio Preview</Link></li>
+              <li><Link to={`/preview/${user?.userName}` } className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">Portfolio Preview</Link></li>
               <li>
                 <a href="/education" className="block text-lg text-[#E0E0E0] hover:text-[#C69749]">
                   Education

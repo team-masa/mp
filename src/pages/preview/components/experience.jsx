@@ -1,6 +1,6 @@
 import K from "../../constants"
 
-const Experience = (experiences) => {
+const Experience = ({experiences}) => {
   return (
     <div id="Experience" className="p-24 max-w-full pl-6 md:pl-16 bg-slate-900">
       <div className="text-center mb-6">

@@ -143,6 +143,16 @@ const SkillsContent = () => {
 
              
               </div>
+              {/* <div className="mb-4">
+                <label className="block text-gray-300 mb-2">Choose level of Proficiency (in percentage)</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  {...register("proficiency", { required: "proficiency is required" })}
+                  className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
+                />
+              </div> */}
               <div className="flex justify-between mt-6">
                 <button
                   type="button"

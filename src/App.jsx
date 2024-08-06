@@ -10,16 +10,7 @@ import ExperienceContent from './pages/dashboard/components/experienceContent';
 import AchievementsContent from './pages/dashboard/components/achievementsContent';
 import VolunteeringContent from './pages/dashboard/components/volunteerContent';
 import EducationForm from './pages/dashboard/components/educationForm';
-import SettingsPage, {
-  EditProfileContent,
-  PersonalInfoContent,
-  AccountManagementContent,
-  EmailUpdatesContent,
-  PrivacyContent,
-  SocialMediaContent,
-  InterestsContent,
-  HelpContent
-} from './pages/dashboard/components/settings';
+import SettingsPage from './pages/dashboard/components/settings';
 
 import Login from "./pages/auth/login";
 import SignUp from "./pages/auth/signUp";
@@ -27,6 +18,14 @@ import ContactContent from './pages/landing/components/contact';
 import AuthLayout from "./layouts/authLayout"
 import { apiGetUserDetails } from "./services/preview";
 import {toast} from "react-toastify"
+import Profile from './pages/dashboard/components/settings/components/profile';
+import PersonalInfo from './pages/dashboard/components/settings/components/personalInfo';
+import AccountManagement from './pages/dashboard/components/settings/components/accountManagement';
+import EmailUpdates from './pages/dashboard/components/settings/components/emailUpdates';
+import Privacy from './pages/dashboard/components/settings/components/privacy';
+import Socials from './pages/dashboard/components/settings/components/socials';
+import Interests from './pages/dashboard/components/settings/components/interests';
+import Help from './pages/dashboard/components/settings/components/help';
 
 // import NotFound from "./pages/NotFound";
 
@@ -50,14 +49,14 @@ const router = createBrowserRouter([
   { path: "/dashboard/settings",
         element: <SettingsPage />,
         children: [
-          { path: "profile", element: <EditProfileContent /> },
-          { path: "personal", element: <PersonalInfoContent /> },
-          { path: "account", element: <AccountManagementContent /> },
-          { path: "email", element: <EmailUpdatesContent /> },
-          { path: "privacy", element: <PrivacyContent /> },
-          { path: "socials", element: <SocialMediaContent /> },
-          { path: "interests", element: <InterestsContent /> },
-          { path: "help", element: <HelpContent /> },
+          { path: "profile", element: <Profile /> },
+          { path: "personal", element: <PersonalInfo />},
+          { path: "account", element: <AccountManagement />},
+          { path: "email", element: <EmailUpdates />},
+          { path: "privacy", element: <Privacy /> },
+          { path: "socials", element: <Socials/> },
+          { path: "interests", element:<Interests/> },
+          { path: "help", element: <Help/>},
         ]
       },
       {

@@ -1,4 +1,4 @@
-
+//src/pages/preview/index.jsx
 import { capitalize } from 'lodash'
 import About from './components/about'
 import Achievement from './components/achievement'
@@ -16,19 +16,17 @@ import Education from './components/education'
 
 const Preview = () => {
   const data = useLoaderData();
-
+  console.log("🚀 ~ Preview ~ data:", data);
   return (
-
-
     <div>
       <Nav username={capitalize(data.userName)}/>
-      <Banner />
-      <About />
+      <Banner bio={data.userProfile.bio} github={data.userProfile.github} />
+      <About firstName={data.firstName} lastName={data.lastName} about={data.userProfile.about} />
       <MySkills skills={data.skills}/>
       <Education education={data.education}/>
-      <Experience experience={data.experiences}/>
-      <Achievement achievement={data.achievements} />
-      <Project project={data.projects}/>
+      <Experience experiences={data.experiences}/>
+      <Achievement achievements={data.achievements} />
+      <Project projects={data.projects}/>
       <Volunteering volunteering={data.volunteering} />
       <Contact />
       <Footer />

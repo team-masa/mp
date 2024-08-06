@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const Project = (projects) => {
+const Project = ({projects}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const projects = [
+  const data = [
     {
       name: "Sports Landing Page",
       url: "https://sports-landing-page-five.vercel.app/",
@@ -36,7 +36,7 @@ const Project = (projects) => {
     <div id="Projects" className='p-8 flex flex-col items-center justify-center bg-slate-900 text-[#735F32] font-semibold'>
       <h1 className='text-2xl mb-8'>PROJECTS</h1>
       <div className='flex gap-6 justify-center'>
-        {projects.map((project, index) => (
+        {data.map((project, index) => (
           <div key={index} className='cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg' onClick={() => openModal(project)}>
             <div className='h-40 overflow-hidden'>
               <iframe src={project.url} className="w-full h-96 -mt-10 pointer-events-none" title={project.name}></iframe>
