@@ -2,7 +2,7 @@
 import React from 'react';
 
 const Overview = () => (
-  <div className="p-6 bg-[#000000] bg-opacity-70 text-white h-full">
+  <div className="p-6 bg-[#000000] bg-opacity-70 text-white h-screen">
     <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
     <p className="mb-6">Welcome to your dashboard! Here you can manage your profile, experiences, achievements, skills, and more.</p>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

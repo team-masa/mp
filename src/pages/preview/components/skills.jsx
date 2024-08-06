@@ -14,7 +14,7 @@ const Skills = [
   { name: 'React', percentage: 45 }
 ];
 
-const MySkills = () => {
+const MySkills = ({skills}) => {
   return (
     <div id='Skills' className="flex flex-col items-center py-24 bg-slate-800">
       <h1   data-aos="fade-up" className="font-bold text-2xl mb-10 text-white">MY SKILLS</h1>

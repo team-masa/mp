@@ -3,12 +3,12 @@ import { Link } from 'react-scroll';
 import { FaTimes } from 'react-icons/fa';
 import { CiMenuFries } from "react-icons/ci"; 
 
-const Nav = () => {
+const Nav = ({username}) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
   const content = (
-    <div className='lg:hidden block absolute top-16 w-full left-0 right-0 bg-slate-900'>
+    <div className='lg:hidden block absolute top-16 w-full left-0 right-0 bg-slate-900 z-50'>
       <ul className='text-center text-xl p-20 text-white'>
         <Link spy={true} smooth={true} to="About">
           <li className='my-4 py-4 border-b border-slate-800 hover:bg-slate-800 hover:rounded'>
@@ -51,13 +51,13 @@ const Nav = () => {
 
   return (
     <nav className='lg:fixed bg-slate-900 top-0 left-0 right-0 z-50'>
-      <div className='h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-4 border-b border-slate-800'>
-        <div className='flex items-center flex-1'>
-          <a href="/"><span className='text-3xl font-bold cursor-pointer'>Maybell</span></a>
+      <div className='h-10vh flex justify-between z-50 text-white lg:py-5 px-20 items-center py-4 border-b border-slate-800'>
+        <div className=''>
+          <a href="/"><span className='text-3xl font-bold cursor-pointer'>{username}</span></a>
         </div>
-        <div className='lg:flex md:flex lg:flex-1 items-center justify-end font-normal hidden'>
-          <div className='flex-10 text-white'>
-            <ul className='flex gap-8 mr-16 text-[18px]'>
+        <div className='lg:flex md:flex lg:flex-1 items-center text-white justify-end font-normal hidden'>
+         
+            <ul className='flex gap-8  text-[18px]'>
               <Link spy={true} smooth={true} to="About">
                 <li className='hover:text-[#735F32] transition border-b-2 border-slate-900 hover:border-white cursor-pointer'>
                   About
@@ -94,12 +94,12 @@ const Nav = () => {
                 </li>
               </Link>
             </ul>
-          </div>
+          
         </div>
         <div>
           {click && content}
         </div>
-        <button className='block lg:hidden transition' onClick={handleClick}>
+        <button className='block md:hidden transition' onClick={handleClick}>
           {click ? <FaTimes /> : <CiMenuFries />}
         </button>
       </div>

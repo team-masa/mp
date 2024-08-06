@@ -1,4 +1,5 @@
-
+//src/pages/preview/index.jsx
+import { capitalize } from 'lodash'
 import About from './components/about'
 import Achievement from './components/achievement'
 import Banner from './components/banner'
@@ -9,23 +10,24 @@ import Nav from './components/nav'
 import Project from './components/project'
 import MySkills from './components/skills'
 import Volunteering from './components/volunteering'
-
+import { useLoaderData } from "react-router-dom";
+import Education from './components/education'
 
 
 const Preview = () => {
-
+  const data = useLoaderData();
+  console.log("🚀 ~ Preview ~ data:", data);
   return (
-
-
     <div>
-      <Nav />
-      <Banner />
-      <About />
-      <MySkills />
-      <Experience />
-      <Achievement />
-      <Project />
-      <Volunteering />
+      <Nav username={capitalize(data.userName)}/>
+      <Banner bio={data.userProfile.bio} github={data.userProfile.github} />
+      <About firstName={data.firstName} lastName={data.lastName} about={data.userProfile.about} />
+      <MySkills skills={data.skills}/>
+      <Education education={data.education}/>
+      <Experience experiences={data.experiences}/>
+      <Achievement achievements={data.achievements} />
+      <Project projects={data.projects}/>
+      <Volunteering volunteering={data.volunteering} />
       <Contact />
       <Footer />
     </div>
