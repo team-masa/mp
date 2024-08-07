@@ -74,41 +74,47 @@ const ExperienceContent = () => {
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('role', { required: true })}
             />
-            {errors.title && <p className="text-red-500">Job Title is required</p>}
+            {errors.role && <p className="text-red-500">Job Title is required</p>}
+            
             <input
               type="text"
-              placeholder="Company"
+              placeholder="Company Name"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('companyName', { required: true })}
             />
-            {errors.company && <p className="text-red-500">Location is required</p>}
+            {errors.companyName && <p className="text-red-500">Company Name is required</p>}
+            
             <input
               type="text"
               placeholder="Company Location"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('location', { required: true })}
             />
-            {errors.location && <p className="text-red-500">Company is required</p>}
+            {errors.location && <p className="text-red-500">Company Location is required</p>}
+            
             <input
               type="date"
               placeholder="Start Date"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('startDate', { required: true })}
             />
-            {errors.startDate && <p className="text-red-500">Period is required</p>}
+            {errors.startDate && <p className="text-red-500">Start Date is required</p>}
+            
             <input
               type="date"
               placeholder="End Date"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('endDate', { required: true })}
             />
-            {errors.endDate && <p className="text-red-500">endDate is required</p>}
+            {errors.endDate && <p className="text-red-500">End Date is required</p>}
+            
             <textarea
-              placeholder="What you did"
+              placeholder="Responsibilities"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('responsibility', { required: true })}
             />
-            {errors.description && <p className="text-red-500">Description is required</p>}
+            {errors.responsibility && <p className="text-red-500">Responsibilities are required</p>}
+            
             <button 
               type="submit"
               className="bg-[#735F32] text-[#C69749] py-2 px-4 rounded hover:bg-[#C69749] hover:text-[#000000] transition duration-300"
@@ -120,11 +126,10 @@ const ExperienceContent = () => {
         )}
 
         <div>
-          {experiences?.map((exp) => (
+          {experiences.map((exp) => (
             <div key={exp.id} className="border-b border-[#282A3A] py-4 flex items-start justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-[#C69749]">{exp.role}</h3>
-                <p className="text-sm text-[#735F32]">{exp.company}</p>
                 <p className="text-sm text-[#735F32]">{exp.companyName}</p>
                 <p className="text-sm text-[#735F32]">{exp.location}</p>
                 <p className="text-xs text-[#e0e0e0]">{exp.startDate}</p>
