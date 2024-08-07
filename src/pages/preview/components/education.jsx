@@ -1,35 +1,26 @@
-const Education = ({education}) => {
+import React from 'react';
+
+const Education = ({ education }) => {
   return (
-    <div className="p-5 bg-gray-100 rounded-lg max-w-lg mx-auto">
+    <div id="Education" className="p-24 max-w-full pl-6 md:pl-16 bg-gradient-to-br from-gray-800 to-gray-900">
       <div className="text-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">EDUCATION</h1>
+        <h1 className="text-3xl font-bold text-yellow-400">EDUCATION</h1>
       </div>
 
-      <div className="space-y-4">
-        <div className="bg-white p-4 rounded shadow">
-          <p className="text-lg font-semibold text-blue-600">Services Basic</p>
-          <p className="text-gray-700">At Services, I studied hard and had fun with friends.</p>
-        </div>
-
-        <div className="bg-white p-4 rounded shadow">
-          <p className="text-lg font-semibold text-blue-600">Kumasi Girls' SHS</p>
-          <p className="text-gray-700">At Kumasi Girls' SHS, I learned from great teachers.</p>
-        </div>
-
-        <div className="bg-white p-4 rounded shadow">
-          <p className="text-lg font-semibold text-blue-600">GIJ</p>
-          <p className="text-gray-700">GIJ was amazing because I learned a lot and met many smart people.</p>
-        </div>
-
-        <div className="bg-white p-4 rounded shadow">
-          <p className="text-lg font-semibold text-blue-600">Stanford University</p>
-          <p className="text-gray-700">At Stanford University, </p>
-        </div>
-
-        <div className="bg-white p-4 rounded shadow">
-          <p className="text-lg font-semibold text-blue-600">Mest Africa</p>
-          <p className="text-gray-700">Mest was wonderful because I learned a lot and made good friends.</p>
-        </div>
+      <div data-aos="fade-up" className="space-y-4 gap-10 text-[16px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10">
+        {education.length > 0 ? (
+          education.map((edu, index) => (
+            <div key={index} className="bg-white bg-opacity-20 p-6 rounded-lg shadow-lg flex flex-col backdrop-filter backdrop-blur-lg">
+              <div data-aos="fade-left" className="flex flex-col md:flex-row md:items-center md:space-x-4">
+                <p className="text-2xl font-bold text-yellow-400">{edu.schoolName}</p>
+                <p className="text-md text-gray-300">{edu.program} - {edu.qualification}</p>
+              </div>
+              <p className="mt-2 text-gray-300">{edu.grade}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-300">No education entries available.</p>
+        )}
       </div>
     </div>
   );

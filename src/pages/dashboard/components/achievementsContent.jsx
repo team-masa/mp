@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
-import { Trash2, Edit, PlusCircle } from 'lucide-react';
+import { Trash2, PlusCircle } from 'lucide-react';
 
 const AchievementsContent = () => {
-  const [achievements, setAchievements] = useState([
-    { id: 1, award: 'Best Developer', description: 'Awarded for exceptional performance in software development.', date: '2023-05-01', institution: 'Tech University' },
-    { id: 2, award: 'Top Innovator', description: 'Recognized for innovative solutions in technology.', date: '2022-11-15', institution: 'Innovate Inc.' }
-  ]);
-
+  const [achievements, setAchievements] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [newAchievement, setNewAchievement] = useState({ award: '', description: '', date: '', institution: '' });
+  const [newAchievement, setNewAchievement] = useState({
+    award: '',
+    description: '',
+    date: '',
+    institution: ''
+  });
 
   const handleAddAchievement = () => {
-    if (newAchievement.award && newAchievement.description && newAchievement.date && newAchievement.institution) {
-      setAchievements([...achievements, { ...newAchievement, id: Date.now() }]);
-      setNewAchievement({ award: '', description: '', date: '', institution: '' });
+    if (
+      newAchievement.award &&
+      newAchievement.description &&
+      newAchievement.date &&
+      newAchievement.institution
+    ) {
+      setAchievements([
+        ...achievements,
+        { ...newAchievement, id: Date.now() }
+      ]);
+      setNewAchievement({
+        award: '',
+        description: '',
+        date: '',
+        institution: ''
+      });
       setShowAddForm(false);
     }
   };
 
   const handleDeleteAchievement = (id) => {
-    setAchievements(achievements.filter(ach => ach.id !== id));
+    setAchievements(achievements.filter((ach) => ach.id !== id));
   };
 
   return (
@@ -42,26 +56,46 @@ const AchievementsContent = () => {
               placeholder="Award"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               value={newAchievement.award}
-              onChange={(e) => setNewAchievement({ ...newAchievement, award: e.target.value })}
+              onChange={(e) =>
+                setNewAchievement({
+                  ...newAchievement,
+                  award: e.target.value
+                })
+              }
             />
             <textarea
               placeholder="Description"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               value={newAchievement.description}
-              onChange={(e) => setNewAchievement({ ...newAchievement, description: e.target.value })}
+              onChange={(e) =>
+                setNewAchievement({
+                  ...newAchievement,
+                  description: e.target.value
+                })
+              }
             />
             <input
               type="date"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               value={newAchievement.date}
-              onChange={(e) => setNewAchievement({ ...newAchievement, date: e.target.value })}
+              onChange={(e) =>
+                setNewAchievement({
+                  ...newAchievement,
+                  date: e.target.value
+                })
+              }
             />
             <input
               type="text"
               placeholder="Institution"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               value={newAchievement.institution}
-              onChange={(e) => setNewAchievement({ ...newAchievement, institution: e.target.value })}
+              onChange={(e) =>
+                setNewAchievement({
+                  ...newAchievement,
+                  institution: e.target.value
+                })
+              }
             />
             <button
               className="bg-[#735F32] text-[#C69749] py-2 px-4 rounded hover:bg-[#C69749] hover:text-[#000000] transition duration-300"
@@ -74,9 +108,14 @@ const AchievementsContent = () => {
 
         <div>
           {achievements.map((ach) => (
-            <div key={ach.id} className="border-b border-[#282A3A] py-4 flex items-start justify-between">
+            <div
+              key={ach.id}
+              className="border-b border-[#282A3A] py-4 flex items-start justify-between"
+            >
               <div>
-                <h3 className="text-lg font-semibold text-[#C69749]">{ach.award}</h3>
+                <h3 className="text-lg font-semibold text-[#C69749]">
+                  {ach.award}
+                </h3>
                 <p className="text-sm text-[#e0e0e0]">{ach.description}</p>
                 <p className="text-xs text-[#735F32]">{ach.date}</p>
                 <p className="text-xs text-[#e0e0e0]">{ach.institution}</p>

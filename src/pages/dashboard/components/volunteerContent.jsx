@@ -1,34 +1,9 @@
-import React, { useState } from 'react';
-import { Trash2, Edit, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Trash2 } from 'lucide-react';
+import { apiGetVolunteering, apiAddVolunteering, apiDeleteVolunteering } from '../../../services/volunteering';
 
 const VolunteeringContent = () => {
-  const [volunteering, setVolunteering] = useState([
-    {
-      id: 1,
-      organization: 'Nonprofit Org',
-      description: 'Helped organize community events',
-      skills: 'Event Planning, Team Coordination',
-      startDate: 'Jan 2022',
-      endDate: 'Dec 2022',
-      role: 'Volunteer Coordinator',
-      responsibility: 'Coordinated volunteers and managed events',
-      location: 'City, Country',
-      projectName: 'Community Outreach Program'
-    },
-    {
-      id: 2,
-      organization: 'Charity Foundation',
-      description: 'Assisted with fundraising campaigns',
-      skills: 'Fundraising, Public Speaking',
-      startDate: 'Mar 2020',
-      endDate: 'Feb 2021',
-      role: 'Fundraising Volunteer',
-      responsibility: 'Organized fundraising events and campaigns',
-      location: 'City, Country',
-      projectName: 'Annual Charity Drive'
-    }
-  ]);
-
+  const [volunteering, setVolunteering] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [newVolunteering, setNewVolunteering] = useState({
     organization: '',
@@ -41,37 +16,75 @@ const VolunteeringContent = () => {
     location: '',
     projectName: ''
   });
+  const [error, setError] = useState('');
 
-  const handleAddVolunteering = () => {
+  useEffect(() => {
+    const fetchVolunteering = async () => {
+      try {
+        const response = await apiGetVolunteering();
+        if (Array.isArray(response.data)) {
+          setVolunteering(response.data);
+        } else {
+          setVolunteering([]);
+          console.error('Unexpected response format:', response.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch volunteering data:', error);
+      }
+    };
+
+    fetchVolunteering();
+  }, []);
+
+  const isValidDate = (date) => {
+    // Simple date validation (change this as needed)
+    return !isNaN(Date.parse(date));
+  };
+
+  const handleAddVolunteering = async () => {
     if (
       newVolunteering.organization &&
       newVolunteering.description &&
       newVolunteering.skills &&
-      newVolunteering.startDate &&
-      newVolunteering.endDate &&
+      isValidDate(newVolunteering.startDate) &&
+      isValidDate(newVolunteering.endDate) &&
       newVolunteering.role &&
       newVolunteering.responsibility &&
       newVolunteering.location &&
       newVolunteering.projectName
     ) {
-      setVolunteering([...volunteering, { ...newVolunteering, id: Date.now() }]);
-      setNewVolunteering({
-        organization: '',
-        description: '',
-        skills: '',
-        startDate: '',
-        endDate: '',
-        role: '',
-        responsibility: '',
-        location: '',
-        projectName: ''
-      });
-      setShowAddForm(false);
+      try {
+        const response = await apiAddVolunteering(newVolunteering);
+        setVolunteering([...volunteering, response.data]);
+        setNewVolunteering({
+          organization: '',
+          description: '',
+          skills: '',
+          startDate: '',
+          endDate: '',
+          role: '',
+          responsibility: '',
+          location: '',
+          projectName: ''
+        });
+        setShowAddForm(false);
+        setError('');
+      } catch (error) {
+        setError(`Failed to add volunteering experience: ${error.response?.data || error.message}`);
+        console.error('Failed to add volunteering experience:', error);
+      }
+    } else {
+      setError('Please ensure all fields are filled out correctly and dates are valid.');
     }
   };
 
-  const handleDeleteVolunteering = (id) => {
-    setVolunteering(volunteering.filter(vol => vol.id !== id));
+  const handleDeleteVolunteering = async (id) => {
+    try {
+      await apiDeleteVolunteering(id);
+      setVolunteering(volunteering.filter(vol => vol._id !== id));
+    } catch (error) {
+      console.error('Failed to delete volunteering experience:', error);
+    }
   };
 
   return (
@@ -110,14 +123,14 @@ const VolunteeringContent = () => {
             />
             <input
               type="text"
-              placeholder="Start Date"
+              placeholder="Start Date (YYYY-MM-DD)"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               value={newVolunteering.startDate}
               onChange={(e) => setNewVolunteering({...newVolunteering, startDate: e.target.value})}
             />
             <input
               type="text"
-              placeholder="End Date"
+              placeholder="End Date (YYYY-MM-DD)"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               value={newVolunteering.endDate}
               onChange={(e) => setNewVolunteering({...newVolunteering, endDate: e.target.value})}
@@ -155,12 +168,13 @@ const VolunteeringContent = () => {
             >
               Add
             </button>
+            {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
         )}
 
         <div>
           {volunteering.map((vol) => (
-            <div key={vol.id} className="border-b border-[#282A3A] py-4 flex items-start justify-between">
+            <div key={vol._id} className="border-b border-[#282A3A] py-4 flex items-start justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-[#C69749]">{vol.organization}</h3>
                 <p className="text-sm text-[#735F32]">{vol.role}</p>
@@ -169,16 +183,13 @@ const VolunteeringContent = () => {
                 <p className="text-xs mt-1 text-[#735F32]">Skills: {vol.skills}</p>
                 <p className="text-xs mt-1 text-[#735F32]">Location: {vol.location}</p>
                 <p className="text-xs mt-1 text-[#735F32]">Project: {vol.projectName}</p>
-                <p className="text-sm mt-2 text-[#e0e0e0]">{vol.responsibility}</p>
               </div>
-              <div className="flex space-x-2">
-                <button
-                  className="text-[#C69749] hover:text-[#735F32] transition duration-300"
-                  onClick={() => handleDeleteVolunteering(vol.id)}
-                >
-                  <Trash2 size={16} />
-                </button>
-              </div>
+              <button
+                onClick={() => handleDeleteVolunteering(vol._id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                <Trash2 size={16} />
+              </button>
             </div>
           ))}
         </div>

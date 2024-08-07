@@ -27,7 +27,7 @@ const Profile = () => {
       setIsLoading(true);
       const res = await apiGetProfile();
       setProfileData(res.data.profile);
-      
+
       // Set form values
       setValue("location", res.data.profile.location);
       setValue("maritalStatus", res.data.profile.maritalStatus);
@@ -36,7 +36,7 @@ const Profile = () => {
       setValue("about", res.data.profile.about);
       setValue("dateOfBirth", res.data.profile.dateOfBirth);
       setValue("contact", res.data.profile.contact);
-      setValue("languages", res.data.profile.languages);
+      setValue("languages", res.data.profile.languages.join(', '));
       setValue("githubLink", res.data.profile.githubLink);
       setValue("linkedinLink", res.data.profile.linkedinLink);
       setValue("twitterLink", res.data.profile.twitterLink);
@@ -64,7 +64,7 @@ const Profile = () => {
       formData.append("about", data.about);
       formData.append("dateOfBirth", data.dateOfBirth);
       formData.append("contact", data.contact);
-      formData.append("languages", JSON.stringify(data.languages));
+      formData.append("languages", data.languages.split(',').map(lang => lang.trim()));
       formData.append("githubLink", data.githubLink);
       formData.append("linkedinLink", data.linkedinLink);
       formData.append("twitterLink", data.twitterLink);
@@ -193,5 +193,4 @@ const Profile = () => {
     </div>
   );
 }
-
 export default Profile;

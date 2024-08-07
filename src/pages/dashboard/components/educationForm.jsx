@@ -12,32 +12,48 @@ const EducationForm = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
+  // Fetch education data from the backend
+  const fetchEducation = async () => {
+    setIsLoading(true);
+    try {
+      const res = await apiGetEducation();
+      setEducationList(res.data.education || []);
+    } catch (error) {
+      toast.error("Failed to fetch education data");
+      console.error("Fetch Education Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle adding new education entry
   const handleAddEducation = async (data) => {
     setIsSubmitting(true);
     try {
-      // Format dates before submission
       const formattedData = {
         ...data,
         startDate: format(new Date(data.startDate), 'yyyy-MM-dd'),
-        endDate: format(new Date(data.endDate), 'yyyy-MM-dd'),
+        endDate: data.endDate ? format(new Date(data.endDate), 'yyyy-MM-dd') : null,
       };
       const res = await apiAddEducation(formattedData);
+      console.log('Add Education Response:', res.data); // Debugging line
       toast.success(res.data.message);
-      reset(); // Reset form fields after submission
+      reset();
       setShowAddForm(false);
       fetchEducation(); // Refresh the education list
     } catch (error) {
       if (error.response) {
-        // Handle server response error
-        toast.error(error.response.data);
+        toast.error(error.response.data.message || "An error occurred");
       } else {
         toast.error("An error occurred");
       }
+      console.error("Add Education Error:", error); // Debugging line
     } finally {
       setIsSubmitting(false);
     }
   };
-  // Handle removing an education
+
+  // Handle removing an education entry
   const handleRemoveEducation = async (id) => {
     if (!id) {
       toast.error("Invalid education ID");
@@ -45,26 +61,16 @@ const EducationForm = () => {
     }
     try {
       const res = await apiDeleteEducation(id);
+      console.log('Delete Education Response:', res.data); // Debugging line
       toast.success(res.data.message);
       fetchEducation(); // Refresh the education list
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data);
+        toast.error(error.response.data.message || "An error occurred");
       } else {
         toast.error("An error occurred");
       }
-    }
-  };
-  //Handle fetching education
-  const fetchEducation = async () => {
-    setIsLoading(true);
-    try {
-      const res = await apiGetEducation();
-      setEducationList(res.data.education);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
+      console.error("Delete Education Error:", error); // Debugging line
     }
   };
 
@@ -147,7 +153,6 @@ const EducationForm = () => {
                 <label className="block text-[#C69749] mb-2">Start Date</label>
                 <input
                   type="date"
-                  placeholder="Start Date"
                   className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                   {...register('startDate', { required: true })}
                 />
@@ -157,57 +162,58 @@ const EducationForm = () => {
                 <label className="block text-[#C69749] mb-2">End Date</label>
                 <input
                   type="date"
-                  placeholder="End Date"
                   className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
-                  {...register('endDate', { required: true })}
+                  {...register('endDate')}
                 />
-                {errors.endDate && <p className="text-red-500">End Date is required</p>}
               </div>
             </div>
-            <div className="flex justify-end mt-4">
-              <button
-                type="submit"
-                className="bg-[#C69749] text-[#000000] py-2 px-6 rounded-lg hover:bg-[#A67C41] transform hover:scale-105 transition duration-300 flex items-center space-x-2"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <Loader size={16} className="mr-2 animate-spin" />
-                ) : (
-                  <Plus size={16} className="mr-2" />
-                )}
-                <span>Add Education</span>
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="bg-[#C69749] text-[#000000] py-2 px-6 rounded-lg hover:bg-[#A67C41] transform hover:scale-105 transition duration-300 flex items-center space-x-2 mt-4"
+              disabled={isSubmitting}
+            >
+              {isSubmitting && <Loader size={20} className="mr-2" />}
+              <span>{isSubmitting ? 'Submitting...' : 'Add Education'}</span>
+            </button>
           </form>
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {isLoading ? (
-          <div className="col-span-full">
-            <Loader size={48} className="mx-auto" />
-          </div>
-        ) : (
-          educationList?.map((education) => (
-            <div key={education._id} className="bg-[#282A3A] p-6 rounded-lg shadow-md mb-6">
-              <h3 className="text-xl font-bold mb-2 text-[#C69749]">{education.schoolName}</h3>
-              <p className="text-lg mb-2 text-[#E0E0E0]">{education.location}</p>
-              <p className="text-[#C69749]">{education.program}</p>
-              <p className="text-[#E0E0E0]">{education.qualification}</p>
-              <p className="text-[#C69749]">{education.grade}</p>
-              <p className="text-[#E0E0E0]">Start Date: {education.startDate}</p>
-              <p className="text-[#E0E0E0]">End Date: {education.endDate}</p>
-              <button
-                onClick={() => handleRemoveEducation(education._id)}
-                className="mt-4 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transform hover:scale-105 transition duration-300"
-              >
-                <X size={16} className="inline-block mr-2" />
-                Remove
-              </button>
+      {isLoading ? (
+        <div className="flex justify-center items-center h-64">
+          <Loader size={24} color="#C69749" />
+        </div>
+      ) : (
+        <div>
+          {educationList.length > 0 ? (
+            <div>
+              <ul>
+                {educationList.map((edu) => (
+                  <li
+                    key={edu.id}
+                    className="bg-[#282A3A] p-4 mb-4 rounded-lg shadow-md flex justify-between items-center"
+                  >
+                    <div>
+                      <h3 className="text-xl font-bold text-[#C69749]">{edu.schoolName}</h3>
+                      <p className="text-lg text-[#E0E0E0]">{edu.program}</p>
+                      <p className="text-sm text-[#E0E0E0]">{edu.location}</p>
+                      <p className="text-sm text-[#E0E0E0]">{edu.startDate} - {edu.endDate || 'Present'}</p>
+                    </div>
+                    <button
+                      onClick={() => handleRemoveEducation(edu.id)}
+                      className="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transform hover:scale-105 transition duration-300"
+                    >
+                      <X size={18} />
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))
-        )}
-      </div>
+          ) : (
+            <p className="text-center text-[#E0E0E0]">No education entries available.</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

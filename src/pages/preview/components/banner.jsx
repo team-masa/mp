@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
-import {  FaLinkedinIn } from 'react-icons/fa6';
+import { FaLinkedinIn } from 'react-icons/fa';
 import { FiTwitter } from 'react-icons/fi';
-import mayImage from "../../../assets/images/may.jpg";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const Banner = ({bio, github}) => {
+const Banner = ({ bio, github, linkedin, twitter, profilePic }) => {
   useEffect(() => {
     AOS.init({
       easing: 'ease-out-quart',
@@ -15,18 +14,18 @@ const Banner = ({bio, github}) => {
     });
   }, []);
 
-  // Handle github click
-  const handleGithubClick = () => {
-    window.open(github, `${github}`);
+  const handleGithubClick = (e) => {
+    e.preventDefault();
+    window.open(github, '_blank', 'noopener,noreferrer');
   }
 
   return (
-    <div className='relative bg-slate-800 lg:px-56 px-10 lg:py-0 py-20 text-center gap-5 lg:text-start flex lg:flex-row flex-col-reverse justify-between lg:gap-28 items-center overflow-hidden'>
+    <div className='relative bg-gradient-to-br from-gray-700 to-gray-800 lg:px-56 px-10 lg:py-0 py-20 text-center gap-5 lg:text-start flex lg:flex-row flex-col-reverse justify-between lg:gap-28 items-center overflow-hidden'>
       
       <div className="absolute inset-0 flex justify-center items-center overflow-hidden">
         <div className="relative w-full h-full">
           {Array.from({ length: 50 }).map((_, index) => (
-            <div key={index} className="w-3 h-3 bg-white rounded-full absolute animate-particle" style={{
+            <div key={index} className="w-3 h-3 bg-gray-400 rounded-full absolute animate-particle" style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDuration: `${Math.random() * 2 + 1}s`,
@@ -36,30 +35,43 @@ const Banner = ({bio, github}) => {
         </div>
       </div>
 
-      
       <div className='relative h-full lg:py-40 flex flex-col justify-center lg:items-start items-center text-white z-10'>
-        <h1 data-aos='fade-right' className='text-[52px] font-semibold mb-8 leading-normal uppercase'>Welcome To <span className='text-[#735F32] '>My Website</span></h1>
-        <p data-aos='fade-left'>{`${bio}`}</p>
-        <div className='flex mt-8 gap-2'>
+        <h1 data-aos='fade-right' className='text-[52px] font-bold mb-8 leading-tight uppercase text-shadow'>
+          Welcome To <span className='text-yellow-400'>My Website</span>
+        </h1>
+        <p data-aos='fade-left' className='text-lg mb-8 max-w-2xl'>{bio}</p>
+        <div className='flex mt-8 gap-4'>
           <div className='flex items-center justify-center'>
-            <div className='flex space-x-2'>
-              <a href={github} onClick={handleGithubClick} id="githubLink" className='text-[#735F32] hover:text-fuchsia-500 rounded-full glow p-2'>
-                <AiFillGithub className='text-[28px]' />
-              </a>
-              <a href="" className='text-[#735F32] hover:text-fuchsia-500 rounded-full glow p-2'>
-                <FaLinkedinIn className='text-[28px]' /> 
-              </a>
-              <a href="" className='text-[#735F32] hover:text-fuchsia-500 rounded-full glow p-2'>
-                <FiTwitter className='text-[28px]' />
-              </a>
+            <div className='flex space-x-4'>
+              {github && (
+                <a href={github} onClick={handleGithubClick} className='text-yellow-400 hover:text-white transition-colors duration-300 rounded-full bg-opacity-20 bg-gray-300 p-3'>
+                  <AiFillGithub className='text-3xl' />
+                </a>
+              )}
+              {linkedin && (
+                <a href={linkedin} target="_blank" rel="noopener noreferrer" className='text-yellow-400 hover:text-white transition-colors duration-300 rounded-full bg-opacity-20 bg-gray-300 p-3'>
+                  <FaLinkedinIn className='text-3xl' /> 
+                </a>
+              )}
+              {twitter && (
+                <a href={twitter} target="_blank" rel="noopener noreferrer" className='text-yellow-400 hover:text-white transition-colors duration-300 rounded-full bg-opacity-20 bg-gray-300 p-3'>
+                  <FiTwitter className='text-3xl' />
+                </a>
+              )}
             </div>
           </div>
         </div>
       </div>
-      <img data-aos='fade-up' src={mayImage} width={290} height={290} className='relative rounded-full border-2 p-1 border-[#735F32] img-glow z-10' alt="" />
+      <img
+        data-aos='fade-up'
+        src={profilePic || 'default-image-url.jpg'}
+        width={320}
+        height={320}
+        className='relative rounded-full border-4 p-1 border-yellow-400 shadow-xl z-10'
+        alt="Profile"
+      />
     </div>
-  )
+  );
 };
 
 export default Banner;
-

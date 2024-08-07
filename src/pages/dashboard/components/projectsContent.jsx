@@ -169,7 +169,7 @@ const ProjectsContent = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-[#C69749] text-[#000000] py-2 px-4 rounded-lg hover:bg-[#A67C41] transform hover:scale-105 transition duration-300 disabled:opacity-50"
+              className="bg-[#C69749] text-[#000000] py-2 px-4 items-center rounded-lg hover:bg-[#A67C41] transform hover:scale-105 transition duration-300 disabled:opacity-50"
             >
               {isSubmitting ? <Pageloader /> : 'Add Project'}
             </button>
