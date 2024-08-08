@@ -96,6 +96,7 @@ const AchievementsContent = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="mb-4 p-4 bg-[#282A3A] rounded" encType="multipart/form-data">
             <input
               type="text"
+              id='award'
               placeholder="Award"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('award', { required: true })}
@@ -104,6 +105,7 @@ const AchievementsContent = () => {
 
             <textarea
               placeholder="Description"
+              id='description'
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('description', { required: true })}
             />
@@ -111,6 +113,7 @@ const AchievementsContent = () => {
 
             <input
               type="text"
+              id='location'
               placeholder="Location"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('location', { required: true })}
@@ -119,6 +122,7 @@ const AchievementsContent = () => {
 
             <input
               type="date"
+              id='date'
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('date', { required: true })}
             />
@@ -126,6 +130,7 @@ const AchievementsContent = () => {
 
             <input
               type="text"
+              id='nameOfInstitution'
               placeholder="Institution"
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('nameOfInstitution', { required: true })}
