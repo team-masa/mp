@@ -19,3 +19,8 @@ export const apiUpdateSkill = async (id, payload) => {
 export const apiDeleteSkill = async (id) => {
   return apiClient.delete(`/skills/${id}`);
 };
+export const apiSearchSkills = async (query) => {
+  return axios.get(`/api/skills/search`, {
+      params: { q: query }
+  });
+};
