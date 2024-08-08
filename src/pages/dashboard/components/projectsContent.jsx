@@ -86,6 +86,7 @@ const ProjectsContent = () => {
               <label className="block text-[#C69749] mb-2">Project Name</label>
               <input
                 type="text"
+                id='projectName'
                 placeholder="Project Name"
                 className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 {...register('projectName', { required: true })}
@@ -96,6 +97,7 @@ const ProjectsContent = () => {
               <label className="block text-[#C69749] mb-2">Description</label>
               <textarea
                 placeholder="Project Description"
+                id='description'
                 className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 {...register('description', { required: true })}
               />
@@ -105,6 +107,7 @@ const ProjectsContent = () => {
               <label className="block text-[#C69749] mb-2">Contributors</label>
               <input
                 type="text"
+                id='contributors'
                 placeholder="Contributors"
                 className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 {...register('contributors')}
@@ -118,6 +121,7 @@ const ProjectsContent = () => {
                   <label key={skill} className="inline-flex items-center">
                     <input
                       type="checkbox"
+                      id='skills'
                       value={skill}
                       {...register('skills')}
                       className="form-checkbox h-5 w-5 text-[#C69749]"
@@ -132,6 +136,7 @@ const ProjectsContent = () => {
               <label className="block text-[#C69749] mb-2">Project Link</label>
               <input
                 type="url"
+                id='link'
                 placeholder="https://example.com"
                 className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 {...register('link')}
@@ -142,6 +147,7 @@ const ProjectsContent = () => {
               <label className="block text-[#C69749] mb-2">Institution</label>
               <input
                 type="text"
+                id='nameOfInstitution'
                 placeholder="Institution Name"
                 className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 {...register('nameOfInstitution')}
@@ -152,6 +158,7 @@ const ProjectsContent = () => {
               <label className="block text-[#C69749] mb-2">Start Date</label>
               <input
                 type="date"
+                id='startDate'
                 className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 {...register('startDate')}
               />
@@ -161,6 +168,7 @@ const ProjectsContent = () => {
               <label className="block text-[#C69749] mb-2">End Date</label>
               <input
                 type="date"
+                id='endDate'
                 className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                 {...register('endDate')}
               />

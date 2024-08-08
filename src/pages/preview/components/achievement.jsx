@@ -9,6 +9,7 @@ const Achievements = ({ achievements }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-up">
           {achievements?.map((achievement) => (
+
             <div
               key={achievement.id}
               className="bg-white bg-opacity-20 rounded-lg shadow-lg p-6 relative overflow-hidden  backdrop-filter backdrop-blur-lg"
