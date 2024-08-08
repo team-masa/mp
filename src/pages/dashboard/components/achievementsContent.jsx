@@ -139,6 +139,7 @@ const AchievementsContent = () => {
 
             <input
               type="file"
+              id='image'
               className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
               {...register('image', { required: true })}
             />
