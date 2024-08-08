@@ -14,7 +14,8 @@ const AchievementsContent = () => {
   const fetchAchievements = async () => {
     try {
       const res = await apiGetAchievements();
-      console.log('Fetched achievements:', res.data); // Debugging
+      console.log('Fetched achievements:', res.data); 
+      
       if (res.data && Array.isArray(res.data.achievements)) {
         setAchievements(res.data.achievements);
       } else {
@@ -41,7 +42,7 @@ const AchievementsContent = () => {
 
     try {
       const res = await apiAddAchievement(formData);
-      console.log('Added achievement:', res.data); // Debugging
+      console.log('Added achievement:', res.data); 
       toast.success(res.data.message);
       setAchievements(prevAchievements => [...prevAchievements, { ...data, id: res.data.id, image: URL.createObjectURL(data.image[0]) }]);
       setShowAddForm(false);
@@ -55,7 +56,8 @@ const AchievementsContent = () => {
   };
 
   const handleDeleteAchievement = async (id) => {
-    console.log("Deleting achievement with id:", id); // Debugging
+    console.log("Deleting achievement with id:", id); 
+    
     if (!id) {
       toast.error("Invalid achievement ID");
       return;
@@ -63,7 +65,8 @@ const AchievementsContent = () => {
 
     try {
       const res = await apiDeleteAchievement(id);
-      console.log('Deleted achievement:', res.data); // Debugging
+      console.log('Deleted achievement:', res.data); 
+      
       toast.success(res.data.message);
       setAchievements(prevAchievements => prevAchievements.filter(ach => ach.id !== id));
     } catch (error) {
@@ -160,7 +163,7 @@ const AchievementsContent = () => {
               <div className="flex space-x-2">
                 <button
                   className="text-[#C69749] hover:text-[#735F32] transition duration-300"
-                  onClick={() => handleDeleteAchievement(ach.id)} // Ensure id is passed correctly
+                  onClick={() => handleDeleteAchievement(ach.id)}
                 >
                   <Trash2 size={16} />
                 </button>
