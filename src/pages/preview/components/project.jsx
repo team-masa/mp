@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import { apiGetProjects } from '../../../services/projects';
 
 const Project = () => {
   const [projects, setProjects] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // Fetch projects from API on component mount
+  // Fetch projects from API 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/api/projects'); // Adjust the endpoint if necessary
-        if (!response.ok) {
-          throw new Error('Failed to fetch projects');
-        }
-        const data = await response.json();
-        setProjects(data);
+        const { data } = await apiGetProjects();
+        setProjects(data.Projects);
       } catch (error) {
         console.error('Error fetching projects:', error);
       }
@@ -65,7 +63,12 @@ const Project = () => {
 
       {/* Modal */}
       {modalOpen && selectedProject && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <Modal
+          isOpen={modalOpen}
+          onRequestClose={closeModal}
+          className="modal-container"
+          overlayClassName="modal-overlay"
+        >
           <div className="bg-gray-900 p-4 rounded-lg w-11/12 lg:w-4/5 h-5/6 lg:h-4/5 relative">
             <button
               onClick={closeModal}
@@ -79,12 +82,14 @@ const Project = () => {
               className="w-full h-full"
               title={selectedProject.name}
               allowFullScreen
+              sandbox="allow-scripts"
             />
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );
 };
 
 export default Project;
+

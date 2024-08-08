@@ -10,12 +10,7 @@ const Achievements = ({ achievements, handleRemoveAchievement }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {achievements?.map((achievement) => (
             <div key={achievement.id} className="bg-white bg-opacity-20 rounded-lg shadow-lg p-6 relative">
-              <button
-                className="absolute top-2 right-2 text-red-400 hover:text-red-600 transition duration-300"
-                onClick={() => handleRemoveAchievement(achievement.id)}
-              >
-                <X size={16} />
-              </button>
+           
               <h3 className="text-xl font-semibold text-yellow-400 mb-2">{achievement.award}</h3>
               <p className="text-gray-300 mb-4">{achievement.description}</p>
               <span className="text-gray-400 text-sm">{achievement.date}</span>
