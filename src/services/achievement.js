@@ -1,21 +1,21 @@
 import { apiClient } from "./config";
 
 export const apiAddAchievement = async (payload) => {
-  return apiClient.post("/achievement", payload); 
+  return apiClient.post("/achievements", payload); 
 };
 
 export const apiGetAchievements = async () => {
-  return apiClient.get("/achievement"); 
+  return apiClient.get("/achievements"); 
 };
 
 export const apiGetAchievementById = async (id) => {
-  return apiClient.get(`/achievement/${id}`);
+  return apiClient.get(`/achievements/${id}`);
 };
 
 export const apiUpdateAchievement = async (id, payload) => {
-  return apiClient.patch(`/achievement/${id}`, payload);
+  return apiClient.patch(`/achievements/${id}`, payload);
 };
 
 export const apiDeleteAchievement = async (id) => {
-  return apiClient.delete(`/achievement/${id}`);
+  return apiClient.delete(`/achievements/${id}`);
 };
