@@ -1,25 +1,10 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import Modal from "react-modal";
-import { apiGetProjects } from "../../../services/projects";
 
-const Project = () => {
-  const [projects, setProjects] = useState([]);
+const Project = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
-
-  // Fetch projects from API
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const { data } = await apiGetProjects();
-        setProjects(data.Projects);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
-
-    fetchProjects();
-  }, []);
 
   // Open modal with selected project
   const openModal = (project) => {
@@ -39,10 +24,10 @@ const Project = () => {
     >
       <h1 className="text-3xl mb-8 text-yellow-400">PROJECTS</h1>
       <div className="flex gap-6 justify-center flex-wrap">
-        {projects.length === 0 ? (
+        {projects?.length === 0 ? (
           <p>No projects available</p>
         ) : (
-          projects.map((project, index) => (
+          projects?.map((project, index) => (
             <div
               key={index}
               className="cursor-pointer bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 transition-transform transform hover:scale-105"
