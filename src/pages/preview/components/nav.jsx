@@ -84,7 +84,7 @@ const Nav = ({ username }) => {
             </Link>
             <Link spy={true} smooth={true} to="Achievement">
               <li className='hover:text-yellow-400 transition border-b-2 border-gray-800 hover:border-white cursor-pointer'>
-                Achievement
+                Achievements
               </li>
             </Link>
             <Link spy={true} smooth={true} to="Projects">

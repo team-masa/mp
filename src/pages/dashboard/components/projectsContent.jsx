@@ -45,7 +45,7 @@ const ProjectsContent = () => {
     try {
       // Convert skills array to comma-separated string
       const formattedData = {
-        ...data,
+        ...data, 
         skills: data.skills.join(', ')
       };
       const res = await apiAddProject(formattedData);
