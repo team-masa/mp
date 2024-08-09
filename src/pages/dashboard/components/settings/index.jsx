@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate, Outlet } from 'react-router-dom';
-import {ChevronFirst, ChevronLast} from 'lucide-react';
-import K from '../../../../constants';
+/* eslint-disable react/prop-types */
+import { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate, Outlet } from "react-router-dom";
+import { ChevronFirst, ChevronLast } from "lucide-react";
+import K from "../../../../constants";
 
 const SettingsPage = () => {
   const [expanded, setExpanded] = useState(true);
@@ -10,13 +11,13 @@ const SettingsPage = () => {
   const particlesContainerRef = useRef(null);
 
   useEffect(() => {
-    if (location.pathname === '/settings') {
-      navigate('/settings/profile');
+    if (location.pathname === "/settings") {
+      navigate("/settings/profile");
     }
 
     // Load particles.js script
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
     script.async = true;
     document.body.appendChild(script);
 
@@ -33,13 +34,13 @@ const SettingsPage = () => {
               },
             },
             color: {
-              value: '#ffffff',
+              value: "#ffffff",
             },
             shape: {
-              type: 'circle',
+              type: "circle",
               stroke: {
                 width: 0,
-                color: '#000000',
+                color: "#000000",
               },
               polygon: {
                 nb_sides: 5,
@@ -68,17 +69,17 @@ const SettingsPage = () => {
             line_linked: {
               enable: true,
               distance: 150,
-              color: '#ffffff',
+              color: "#ffffff",
               opacity: 0.4,
               width: 1,
             },
             move: {
               enable: true,
               speed: 6,
-              direction: 'none',
+              direction: "none",
               random: false,
               straight: false,
-              out_mode: 'out',
+              out_mode: "out",
               bounce: false,
               attract: {
                 enable: false,
@@ -88,15 +89,15 @@ const SettingsPage = () => {
             },
           },
           interactivity: {
-            detect_on: 'canvas',
+            detect_on: "canvas",
             events: {
               onhover: {
                 enable: true,
-                mode: 'grab', // Can also be 'bubble' or 'repulse'
+                mode: "grab", // Can also be 'bubble' or 'repulse'
               },
               onclick: {
                 enable: true,
-                mode: 'push', // Can also be 'remove'
+                mode: "push", // Can also be 'remove'
               },
               resize: true,
             },
@@ -143,15 +144,28 @@ const SettingsPage = () => {
         id="particles-js"
         className="absolute inset-0 z-0"
         style={{
-          backgroundColor: '#000000',
+          backgroundColor: "#000000",
         }}
       ></div>
-      <aside className={`min-h-screen ${expanded ? 'w-64' : 'w-20'} bg-[#282A3A] bg-opacity-80 text-white transition-all duration-300 p-4 z-10`}>
+      <aside
+        className={`min-h-screen ${
+          expanded ? "w-64" : "w-20"
+        } bg-[#282A3A] bg-opacity-80 text-white transition-all duration-300 p-4 z-10`}
+      >
         <nav className="h-full flex flex-col">
           <div className="flex items-center justify-between mb-6">
-            <h2 className={`text-2xl font-bold ${expanded ? '' : 'hidden'}`}>Settings</h2>
-            <button onClick={() => setExpanded(curr => !curr)} className="p-1.5 rounded-lg bg-[#735F32] hover:bg-[#C69749]">
-              {expanded ? <ChevronFirst size={20} /> : <ChevronLast size={20} />}
+            <h2 className={`text-2xl font-bold ${expanded ? "" : "hidden"}`}>
+              Settings
+            </h2>
+            <button
+              onClick={() => setExpanded((curr) => !curr)}
+              className="p-1.5 rounded-lg bg-[#735F32] hover:bg-[#C69749]"
+            >
+              {expanded ? (
+                <ChevronFirst size={20} />
+              ) : (
+                <ChevronLast size={20} />
+              )}
             </button>
           </div>
           <ul className="flex-1 space-y-2">
@@ -181,15 +195,15 @@ const SidebarItem = ({ icon, text, onClick, expanded, active = false }) => {
     <li>
       <button
         onClick={onClick}
-        className={`flex items-center p-2 rounded-lg w-full text-left ${active ? 'bg-[#C69749]' : 'hover:bg-[#735F32]'}`}
+        className={`flex items-center p-2 rounded-lg w-full text-left ${
+          active ? "bg-[#C69749]" : "hover:bg-[#735F32]"
+        }`}
       >
         {icon}
-        <span className={expanded ? 'ml-3' : 'hidden'}>{text}</span>
+        <span className={expanded ? "ml-3" : "hidden"}>{text}</span>
       </button>
     </li>
   );
 };
 
-
 export default SettingsPage;
-

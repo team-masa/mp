@@ -1,20 +1,19 @@
-import React from 'react'
-import { Rings } from 'react-loader-spinner'
+import { Rings } from "react-loader-spinner";
 
 const Pageloader = () => {
   return (
     <div>
-        <Rings
+      <Rings
         visible={true}
         height="80"
         width="80"
-        color= "#4fa94d"
-        ariaLabel='rings-loading'
+        color="#C69749"
+        ariaLabel="rings-loading"
         wrapperStyle={{}}
-        wrapperClass=''
-        />    
+        wrapperClass=""
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Pageloader
+export default Pageloader;

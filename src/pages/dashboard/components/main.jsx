@@ -1,12 +1,12 @@
-// src/pages/dashboard/components/Dashboard.jsx
+/* eslint-disable react/prop-types */
 
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate, Outlet ,Navigate} from 'react-router-dom';
-import {  ChevronFirst, ChevronLast, LogOut } from 'lucide-react';
-import K from '../../../constants';
-import { toast } from 'react-toastify';
-import { getDetails } from '../../../services/config';
-import { apiLogout } from '../../../services/auth';
+import { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate, Outlet, Navigate } from "react-router-dom";
+import { ChevronFirst, ChevronLast, LogOut } from "lucide-react";
+import K from "../../../constants";
+import { toast } from "react-toastify";
+import { getDetails } from "../../../services/config";
+import { apiLogout } from "../../../services/auth";
 
 const Dashboard = () => {
   const [expanded, setExpanded] = useState(true);
@@ -16,7 +16,6 @@ const Dashboard = () => {
   const [user, setUser] = useState();
 
   const { token, firstName, lastName, userName } = getDetails();
-
 
   useEffect(() => {
     if (token) {
@@ -28,17 +27,14 @@ const Dashboard = () => {
     }
   }, []);
 
-  if (!token) {
-    return <Navigate to="/login" />}
-
   useEffect(() => {
-    if (location.pathname === '/dashboard') {
-      navigate('/dashboard/home');
+    if (location.pathname === "/dashboard") {
+      navigate("/dashboard/home");
     }
 
     // Load particles.js script
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
     script.async = true;
     document.body.appendChild(script);
 
@@ -55,13 +51,13 @@ const Dashboard = () => {
               },
             },
             color: {
-              value: '#ffffff',
+              value: "#ffffff",
             },
             shape: {
-              type: 'circle',
+              type: "circle",
               stroke: {
                 width: 0,
-                color: '#000000',
+                color: "#000000",
               },
               polygon: {
                 nb_sides: 5,
@@ -90,17 +86,17 @@ const Dashboard = () => {
             line_linked: {
               enable: true,
               distance: 150,
-              color: '#ffffff',
+              color: "#ffffff",
               opacity: 0.4,
               width: 1,
             },
             move: {
               enable: true,
               speed: 6,
-              direction: 'none',
+              direction: "none",
               random: false,
               straight: false,
-              out_mode: 'out',
+              out_mode: "out",
               bounce: false,
               attract: {
                 enable: false,
@@ -110,15 +106,15 @@ const Dashboard = () => {
             },
           },
           interactivity: {
-            detect_on: 'canvas',
+            detect_on: "canvas",
             events: {
               onhover: {
                 enable: true,
-                mode: 'grab', // Can also be 'bubble' or 'repulse'
+                mode: "grab", // Can also be 'bubble' or 'repulse'
               },
               onclick: {
                 enable: true,
-                mode: 'push', // Can also be 'remove'
+                mode: "push", // Can also be 'remove'
               },
               resize: true,
             },
@@ -158,17 +154,20 @@ const Dashboard = () => {
     };
   }, [location, navigate]);
 
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+
   const handleLogout = async () => {
-    
     try {
-        await apiLogout();
-        toast.success("Logged out successfully");
-        navigate("/login");
-      } catch (error) {
-        toast.error("An error occured");
-      }
-  
+      await apiLogout();
+      toast.success("Logged out successfully");
+      navigate("/login");
+    } catch (error) {
+      toast.error("An error occured");
+    }
   };
+  console.log(user);
 
   return (
     <div className="flex min-h-screen relative">
@@ -177,16 +176,29 @@ const Dashboard = () => {
         id="particles-js"
         className="absolute inset-0 z-0"
         style={{
-          backgroundColor: '#282A3A', 
+          backgroundColor: "#282A3A",
         }}
-      ></div>
-      <aside className={`min-h-screen ${expanded ? 'w-64' : 'w-20'} bg-black bg-opacity-70 text-white transition-all duration-300 p-4 z-10`}>
+      />
+      <aside
+        className={`min-h-screen ${
+          expanded ? "w-64" : "w-20"
+        } bg-black bg-opacity-70 text-white transition-all duration-300 p-4 z-10`}
+      >
         <nav className="h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h2 className={`text-2xl font-bold ${expanded ? '' : 'hidden'}`}>Dashboard</h2>
-              <button onClick={() => setExpanded(curr => !curr)} className="p-1.5 rounded-lg bg-[#735F32] hover:bg-[#C69749]">
-                {expanded ? <ChevronFirst size={20} /> : <ChevronLast size={20} />}
+              <h2 className={`text-2xl font-bold ${expanded ? "" : "hidden"}`}>
+                Dashboard
+              </h2>
+              <button
+                onClick={() => setExpanded((curr) => !curr)}
+                className="p-1.5 rounded-lg hover:bg-[#735F32] bg-[#C69749]"
+              >
+                {expanded ? (
+                  <ChevronFirst size={20} />
+                ) : (
+                  <ChevronLast size={20} />
+                )}
               </button>
             </div>
             <ul className="flex-1 space-y-2">
@@ -202,20 +214,32 @@ const Dashboard = () => {
               ))}
             </ul>
           </div>
-          <div className="border-t border-[#565470] p-3">
-            <div className={`flex items-center ${expanded ? 'justify-between' : 'justify-center'}`}>
-              <div className={`flex items-center gap-2 ${expanded ? '' : 'hidden'}`}>
-                <img
-                  src="https://ui-avatars.com/api/?background=F50081&color=fff&name=John+Doe"
-                  alt=""
-                  className="w-10 h-10 rounded-md"
-                />
+          <div className="border-t border-[#565470] px-2 py-3">
+            <div
+              className={`flex items-center ${
+                expanded ? "justify-between" : "justify-center"
+              }`}
+            >
+              <div
+                className={`flex items-center gap-3 ${
+                  expanded ? "" : "hidden"
+                }`}
+              >
+                <span className="bg-[#C69749] rounded-md p-2">
+                  {user?.firstName.substring(0, 1)}
+                  {user?.lastName.substring(0, 1)}
+                </span>
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">John Doe</span>
-                  <span className="text-xs text-gray-300">johndoe@example.com</span>
+                  <span className="text-sm font-medium text-white flex">
+                    {user?.firstName} {user?.lastName}
+                  </span>
                 </div>
               </div>
-              <button onClick={handleLogout} className="p-1.5 rounded-lg bg-[#735F32] hover:bg-[#C69749]" title="Logout">
+              <button
+                onClick={handleLogout}
+                className="p-1.5 rounded-lg hover:bg-[#735F32] bg-[#C69749]"
+                title="Logout"
+              >
                 <LogOut size={20} />
               </button>
             </div>
@@ -223,7 +247,8 @@ const Dashboard = () => {
         </nav>
       </aside>
       <main className="flex-1 p-8 relative z-10">
-        <Outlet context={[user, setUser]}/> {/* This will render the child routes */}
+        <Outlet context={[user, setUser]} />{" "}
+        {/* This will render the child routes */}
       </main>
     </div>
   );
@@ -234,10 +259,12 @@ const SidebarItem = ({ icon, text, onClick, expanded, active = false }) => {
     <li>
       <button
         onClick={onClick}
-        className={`flex items-center p-2 px-2 rounded-lg w-full text-left ${active ? 'bg-[#C69749]' : 'hover:bg-[#735F32]'}`}
+        className={`flex items-center p-2 px-2 rounded-lg w-full text-left ${
+          active ? "bg-[#C69749]" : "hover:bg-[#735F32]"
+        }`}
       >
         {icon}
-        <span className={expanded ? 'ml-3' : 'hidden'}>{text}</span>
+        <span className={expanded ? "ml-3" : "hidden"}>{text}</span>
       </button>
     </li>
   );

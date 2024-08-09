@@ -20,7 +20,7 @@ export const apiDeleteSkill = async (id) => {
   return apiClient.delete(`/skills/${id}`);
 };
 export const apiSearchSkills = async (query) => {
-  return axios.get(`/api/skills/search`, {
-      params: { q: query }
+  return apiClient.get(`/api/skills/search`, {
+    params: { q: query },
   });
 };
