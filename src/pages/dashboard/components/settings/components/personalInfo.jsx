@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 const PersonalInfo = () => {
-  const [birthdate, setBirthdate] = useState({ dateOfBirth: '' });
-  const [gender, setGender] = useState('');
+  const [birthdate, setBirthdate] = useState({ dateOfBirth: "" });
+  const [gender, setGender] = useState("");
   const [interests, setInterests] = useState([]);
   const [lifeStages, setLifeStages] = useState([]);
 
@@ -16,7 +16,9 @@ const PersonalInfo = () => {
 
   const handleInterestToggle = (interest) => {
     setInterests((prev) =>
-      prev.includes(interest) ? prev.filter((i) => i !== interest) : [...prev, interest]
+      prev.includes(interest)
+        ? prev.filter((i) => i !== interest)
+        : [...prev, interest]
     );
   };
 
@@ -42,7 +44,8 @@ const PersonalInfo = () => {
     <div className="p-4 bg-[#282A3A] bg-opacity-80 rounded-lg shadow-lg max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-[#735F32]">Personal Info</h1>
       <p className="mb-4 text-[#C69749]">
-        Completing this information helps with your recommendations. Gender and Birthdate will not appear on your public profile.
+        Completing this information helps with your recommendations. Gender and
+        Birthdate will not appear on your public profile.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -73,17 +76,27 @@ const PersonalInfo = () => {
         </div>
 
         <div className="mb-6">
-          <label className="block text-[#C69749] mb-2">What are you looking for?</label>
+          <label className="block text-[#C69749] mb-2">
+            What are you looking for?
+          </label>
           <div className="flex flex-wrap gap-2">
-            {['Practice Hobbies', 'Socialize', 'Make Friends', 'Professionally Network'].map((interest) => (
+            {[
+              "Practice Hobbies",
+              "Socialize",
+              "Make Friends",
+              "Professionally Network",
+            ].map((interest) => (
               <button
                 key={interest}
                 type="button"
                 onClick={() => handleInterestToggle(interest)}
-                className={`px-3 py-1 rounded-full border ${interests.includes(interest) ? 'bg-[#735F32] text-white' : 'text-[#735F32]'
-                  }`}
+                className={`px-3 py-1 rounded-full border ${
+                  interests.includes(interest)
+                    ? "bg-[#735F32] text-white"
+                    : "text-[#735F32]"
+                }`}
               >
-                {interest} {interests.includes(interest) ? '-' : '+'}
+                {interest} {interests.includes(interest) ? "-" : "+"}
               </button>
             ))}
           </div>
@@ -91,17 +104,30 @@ const PersonalInfo = () => {
 
         <div className="mb-6">
           <label className="block text-[#C69749] mb-2">Life stages</label>
-          <p className="text-sm text-[#C69749] mb-2">Select what represents you</p>
+          <p className="text-sm text-[#C69749] mb-2">
+            Select what represents you
+          </p>
           <div className="flex flex-wrap gap-2">
-            {['Recent Graduate', 'Student', 'New In Town', 'New Empty Nester', 'Newly Retired', 'New Parent', 'Career Change'].map((stage) => (
+            {[
+              "Recent Graduate",
+              "Student",
+              "New In Town",
+              "New Empty Nester",
+              "Newly Retired",
+              "New Parent",
+              "Career Change",
+            ].map((stage) => (
               <button
                 key={stage}
                 type="button"
                 onClick={() => handleLifeStageToggle(stage)}
-                className={`px-3 py-1 rounded-full border ${lifeStages.includes(stage) ? 'bg-[#735F32] text-white' : 'text-[#735F32]'
-                  }`}
+                className={`px-3 py-1 rounded-full border ${
+                  lifeStages.includes(stage)
+                    ? "bg-[#735F32] text-white"
+                    : "text-[#735F32]"
+                }`}
               >
-                {stage} {lifeStages.includes(stage) ? '-' : '+'}
+                {stage} {lifeStages.includes(stage) ? "-" : "+"}
               </button>
             ))}
           </div>
@@ -113,7 +139,8 @@ const PersonalInfo = () => {
         >
           Save Changes
         </button>
-      </form>{/*  */}
+      </form>
+      {/*  */}
     </div>
   );
 };

@@ -1,25 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import { apiGetProjects } from '../../../services/projects';
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import Modal from "react-modal";
 
-const Project = () => {
-  const [projects, setProjects] = useState([]);
+const Project = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
-
-  // Fetch projects from API 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const { data } = await apiGetProjects();
-        setProjects(data.Projects);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-      }
-    };
-
-    fetchProjects();
-  }, []);
 
   // Open modal with selected project
   const openModal = (project) => {
@@ -33,13 +18,16 @@ const Project = () => {
   };
 
   return (
-    <div id="Projects" className="p-8 flex flex-col items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 text-white font-semibold">
+    <div
+      id="Projects"
+      className="p-8 flex flex-col items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900 text-white font-semibold"
+    >
       <h1 className="text-3xl mb-8 text-yellow-400">PROJECTS</h1>
       <div className="flex gap-6 justify-center flex-wrap">
-        {projects.length === 0 ? (
+        {projects?.length === 0 ? (
           <p>No projects available</p>
         ) : (
-          projects.map((project, index) => (
+          projects?.map((project, index) => (
             <div
               key={index}
               className="cursor-pointer bg-gray-900 rounded-lg overflow-hidden shadow-lg w-80 transition-transform transform hover:scale-105"
@@ -54,7 +42,9 @@ const Project = () => {
                 />
               </div>
               <div className="p-4 bg-gray-800">
-                <p className="text-yellow-400 text-lg font-semibold">{project.name}</p>
+                <p className="text-yellow-400 text-lg font-semibold">
+                  {project.name}
+                </p>
               </div>
             </div>
           ))
@@ -76,7 +66,9 @@ const Project = () => {
             >
               &times;
             </button>
-            <h2 className="text-xl font-bold text-yellow-400 mb-4">{selectedProject.name}</h2>
+            <h2 className="text-xl font-bold text-yellow-400 mb-4">
+              {selectedProject.name}
+            </h2>
             <iframe
               src={selectedProject.link}
               className="w-full h-full"
@@ -92,4 +84,3 @@ const Project = () => {
 };
 
 export default Project;
-

@@ -1,54 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { apiGetProfile, apiUpdateProfile } from '../../../../../services/profile';
-import Loader from '../../../../../components/loader';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import {
+  apiGetProfile,
+  apiUpdateProfile,
+} from "../../../../../services/profile";
+import Loader from "../../../../../components/loader";
+import { toast } from "react-toastify";
 
 const Socials = () => {
-  const [socialLinks, setSocialLinks] = useState({
-    github: '',
-    twitter: '',
-    linkedin: '',
-  });
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const { register, handleSubmit, setValue } = useForm();
+  const [userId, setUserId] = useState();
+
+  const fetchSocialLinks = async () => {
+    try {
+      setIsLoading(true);
+      const res = await apiGetProfile();
+      console.log(res.data.profile);
+      const { githubLink, twitterLink, linkedinLink, id } = res.data.profile;
+
+      setUserId(id);
+      setValue("githubLink", githubLink ?? "");
+      setValue("twitterLink", twitterLink ?? "");
+      setValue("linkedinLink", linkedinLink ?? "");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to load social links");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchSocialLinks = async () => {
-      try {
-        setIsLoading(true);
-        const res = await apiGetProfile();
-        const { githubLink, twitterLink, linkedinLink } = res.data;
-        setSocialLinks({ github: githubLink, twitter: twitterLink, linkedin: linkedinLink });
-        setValue('githubLink', githubLink);
-        setValue('twitterLink', twitterLink);
-        setValue('linkedinLink', linkedinLink);
-      } catch (error) {
-        console.error(error);
-        toast.error('Failed to load social links');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchSocialLinks();
-  }, [setValue]);
+  }, []);
 
   const onSubmit = async (data) => {
     try {
       setIsSubmitting(true);
-      const res = await apiUpdateProfile({
+      await apiUpdateProfile(userId, {
         githubLink: data.githubLink,
         twitterLink: data.twitterLink,
         linkedinLink: data.linkedinLink,
       });
-      setSocialLinks(data);
-      toast.success('Social links updated successfully');
+
+      toast.success("Social links updated successfully");
     } catch (error) {
       console.error(error);
-      toast.error('Failed to update social links');
+      toast.error("Failed to update social links");
     } finally {
       setIsSubmitting(false);
     }
@@ -58,7 +58,8 @@ const Socials = () => {
     <div className="bg-[#282A3A] bg-opacity-80 rounded-lg max-w-4xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-[#735F32]">Social Media</h1>
       <p className="mb-6 text-[#C69749]">
-        Add your social media below to display links to them on all your Meetup group profiles.
+        Add your social media below to display links to them on all your Meetup
+        group profiles.
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -68,7 +69,9 @@ const Socials = () => {
             <input
               type="url"
               className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
-              {...register('githubLink', { required: 'GitHub link is required' })}
+              {...register("githubLink", {
+                required: "GitHub link is required",
+              })}
             />
           </div>
           <div>
@@ -76,7 +79,9 @@ const Socials = () => {
             <input
               type="url"
               className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
-              {...register('linkedinLink', { required: 'LinkedIn link is required' })}
+              {...register("linkedinLink", {
+                required: "LinkedIn link is required",
+              })}
             />
           </div>
           <div>
@@ -84,7 +89,9 @@ const Socials = () => {
             <input
               type="url"
               className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
-              {...register('twitterLink', { required: 'Twitter link is required' })}
+              {...register("twitterLink", {
+                required: "Twitter link is required",
+              })}
             />
           </div>
         </div>
@@ -104,4 +111,3 @@ const Socials = () => {
 };
 
 export default Socials;
-

@@ -1,14 +1,14 @@
-import { InfinitySpin } from "react-loader-spinner"
+import { InfinitySpin } from "react-loader-spinner";
 
 const Loader = () => {
-    return (
-            <InfinitySpin
-                visible={true}
-                width="50"
-                color="#735F32"
-                ariaLabel="infinity-spin-loading"
-            />
-    )
-}
+  return (
+    <InfinitySpin
+      visible={true}
+      width="50"
+      color="white"
+      ariaLabel="infinity-spin-loading"
+    />
+  );
+};
 
-export default Loader
+export default Loader;
