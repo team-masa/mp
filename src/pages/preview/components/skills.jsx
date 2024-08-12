@@ -5,10 +5,10 @@ import "react-circular-progressbar/dist/styles.css";
 import VisibilitySensor from "react-visibility-sensor";
 
 const proficiencyLevels = {
-  Beginner: { level: 25, color: "#FF6B6B" },
-  Intermediate: { level: 50, color: "#4ECDC4" },
-  Advanced: { level: 75, color: "#45B7D1" },
-  Expert: { level: 100, color: "#A06CD5" },
+  Beginner: { level: 25, color: "#FFB347" },     // Soft orange
+  Intermediate: { level: 50, color: "#82C55C" }, // Fresh green
+  Advanced: { level: 75, color: "#5CADFF" },     // Sky blue
+  Expert: { level: 100, color: "#B27AFF" },      // Lavender purple
 };
 
 const MySkills = ({ skills }) => {

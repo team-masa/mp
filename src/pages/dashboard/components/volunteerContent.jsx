@@ -254,7 +254,7 @@ const VolunteeringContent = () => {
               </p>
             </div>
             <button
-              onClick={() => handleDeleteVolunteering(vol._id)}
+              onClick={() => handleDeleteVolunteering(vol.id)}
               className="text-red-500 hover:text-red-700"
             >
               <Trash2 size={16} />

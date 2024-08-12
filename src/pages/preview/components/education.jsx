@@ -31,7 +31,7 @@ const Education = ({ education }) => {
                   {edu.program} - {edu.qualification}
                 </p>
               </div>
-              <p className="mt-2 text-gray-300">{edu.grade}</p>
+              {/* <p className="mt-2 text-gray-300">{edu.grade}</p> */}
             </div>
           ))
         ) : (

@@ -20,16 +20,18 @@ const Preview = () => {
     <div>
       <Nav username={capitalize(data.userName)} />
       <Banner
+        profilePicture={data.userProfile.profilePicture}
         bio={data.userProfile.bio}
         github={data.userProfile.githubLink}
         linkedin={data.userProfile.linkedinLink}
         twitter={data.userProfile.twitterLink}
       />
       <About
+        profilePicture={data.userProfile.profilePicture}
         firstName={data.firstName}
         lastName={data.lastName}
         about={data.userProfile.about}
-        resumeLink={data.userProfile.resume}
+        resume={data.userProfile.resume}
       />
       <MySkills skills={data.skills} />
       <Education education={data.education} />
@@ -39,7 +41,8 @@ const Preview = () => {
       <Volunteering volunteering={data.volunteering} />
       <Contact />
       <Footer
-        bio={data.userProfile.bio}
+        // bio={data.userProfile.bio}
+        services={data.userProfile.services}
         userName={data.userName}
         contact={data.userProfile.contact}
         email={data.email}

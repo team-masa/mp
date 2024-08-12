@@ -16,6 +16,7 @@ const Profile = () => {
   });
 
   const [profilePicture, setProfilePicture] = useState(null);
+  const [resumeFile, setResumeFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [profileData, setProfileData] = useState();
@@ -36,12 +37,9 @@ const Profile = () => {
       setValue("sex", res.data?.profile?.sex);
       setValue("bio", res.data?.profile?.bio);
       setValue("about", res.data?.profile?.about);
-      setValue("dateOfBirth", res.data?.profile?.dateOfBirth);
       setValue("contact", res.data?.profile?.contact);
       setValue("languages", res.data?.profile?.languages?.join(", "));
-      // setValue("githubLink", res.data?.profile?.githubLink);
-      // setValue("linkedinLink", res.data?.profile?.linkedinLink);
-      // setValue("twitterLink", res.data?.profile?.twitterLink);
+      setValue("services", res.data?.profile?.services?.join(", "));
 
       setProfilePicture(res.data?.profile?.profilePicture);
     } catch (error) {
@@ -54,21 +52,21 @@ const Profile = () => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    console.log("data: ", data);
 
     try {
       const formData = new FormData();
       if (profilePicture instanceof File) {
         formData.append("profilePicture", profilePicture);
       }
+      if (resumeFile) {
+        formData.append("resume", resumeFile);
+      }
       formData.append("location", data.location);
       formData.append("maritalStatus", data.maritalStatus);
       formData.append("sex", data.sex);
       formData.append("bio", data.bio);
       formData.append("about", data.about);
-      // formData.append("dateOfBirth", data.dateOfBirth ?? "mm");
       formData.append("contact", data.contact);
-      formData.append("resume", data.resume);
 
       const languagesArray = data.languages
         .split(",")
@@ -76,17 +74,22 @@ const Profile = () => {
       languagesArray.forEach((language) => {
         formData.append("languages[]", language);
       });
-      // formData.append("githubLink", data.githubLink ?? "mm");
-      // formData.append("linkedinLink", data.linkedinLink ?? "mm");
-      // formData.append("twitterLink", data.twitterLink ?? "mm");
-      console.log(formData.values());
+
+      const servicesArray = data.services
+        .split(",")
+        .map((service) => service.trim());
+      servicesArray.forEach((service) => {
+        formData.append("services[]", service);
+      });
+
+      console.log("Form Data being sent: ", formData); // Log FormData contents
+
       const res = await apiUpdateProfile(profileData.id, formData);
 
-      console.log(res.data);
       toast.success(res.data.message);
       fetchProfileData(); // Refresh profile data
     } catch (error) {
-      console.error(error);
+      console.error("Error in onSubmit: ", error.response || error);
       toast.error("An error occurred while updating profile");
     } finally {
       setIsSubmitting(false);
@@ -139,7 +142,7 @@ const Profile = () => {
           <div className="flex-grow">
             <label className="block text-[#C69749] mb-2">Bio</label>
             <textarea
-              className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
+              className="w-full p-2 break-words border border-[#C69749] rounded bg-[#282A3A] text-white"
               rows="4"
               {...register("bio")}
               placeholder="Write a little bit about yourself here"
@@ -149,7 +152,7 @@ const Profile = () => {
         <div>
           <label className="block text-[#C69749] mb-2">About</label>
           <textarea
-            className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
+            className="w-full p-2 break-words border border-[#C69749] rounded bg-[#282A3A] text-white"
             rows="5"
             {...register("about")}
             placeholder="Write more details about yourself here"
@@ -165,7 +168,7 @@ const Profile = () => {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-          </div>{" "}
+          </div>
           <div>
             <label className="block text-[#C69749] mb-2">Marital Status</label>
             <select
@@ -186,12 +189,12 @@ const Profile = () => {
             />
           </div>
           <div>
-            {" "}
             <label className="block text-[#C69749] mb-2">Resume</label>
             <input
-              type="text"
+              type="file"
               id="resume"
-              {...register("resume")}
+              accept=".pdf,.docx,.doc"
+              onChange={(e) => setResumeFile(e.target.files[0])}
               className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
             />
           </div>
@@ -209,21 +212,29 @@ const Profile = () => {
               type="text"
               className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
               {...register("languages")}
-              placeholder="separate by commas"
+              placeholder="Comma-separated list of languages"
+            />
+          </div>
+          <div>
+            <label className="block text-[#C69749] mb-2">Services</label>
+            <input
+              type="text"
+              className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
+              {...register("services")}
+              placeholder="Comma-separated list of services e.g Design, Web Dev"
             />
           </div>
         </div>
-        <div className="flex justify-end mt-6">
-          <button
-            type="submit"
-            className="bg-[#C69749] hover:bg-[#735F32] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-300"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? <Loader /> : "Save Changes"}
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="bg-[#C69749] hover:bg-[#735F32] text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? <Loader /> : "Save Changes"}
+        </button>
       </form>
     </div>
   );
 };
+
 export default Profile;
