@@ -2,14 +2,23 @@
 
 import { Link } from "react-router-dom";
 
-const About = ({ about, profilePicture, resumeLink }) => {
+const About = ({ about, profilePicture, resume }) => {
   const handleDownload = () => {
+    if (!resume) {
+      console.error("Resume URL is not provided.");
+      return;
+    }
+
     // Create an anchor element and trigger a download
     const link = document.createElement('a');
-    link.href = resumeLink;
-    link.download = resumeLink.split('/').pop(); // Extract filename from URL
+    link.href = resume;
+    link.download = resume.split('/').pop(); // Extract filename from URL
     document.body.appendChild(link);
+
+    // Trigger the download
     link.click();
+    
+    // Clean up and remove the link
     document.body.removeChild(link);
   };
 
@@ -42,6 +51,7 @@ const About = ({ about, profilePicture, resumeLink }) => {
           <div className="flex items-center justify-center">
             <button
               onClick={handleDownload}
+              id="resume"
               className="shadow-lg hover:shadow-xl text-white bg-gradient-to-r from-yellow-400 to-yellow-500 border-none rounded-lg py-4 px-8 uppercase transition-colors duration-300"
             >
               Resume

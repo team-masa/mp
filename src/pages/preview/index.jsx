@@ -31,7 +31,7 @@ const Preview = () => {
         firstName={data.firstName}
         lastName={data.lastName}
         about={data.userProfile.about}
-        resumeLink={data.userProfile.resume}
+        resume={data.userProfile.resume}
       />
       <MySkills skills={data.skills} />
       <Education education={data.education} />
