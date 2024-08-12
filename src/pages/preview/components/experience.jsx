@@ -1,38 +1,34 @@
 /* eslint-disable react/prop-types */
+import { FaCircle } from 'react-icons/fa';
 
 const Experience = ({ experiences }) => {
   return (
     <div
       id="Experience"
-      className="p-24 max-w-full pl-6 md:pl-16 bg-gradient-to-b from-gray-800 to-gray-900"
+      className="p-8 md:p-24 max-w-full bg-gradient-to-b from-gray-800 to-gray-900"
     >
-      <div className="text-center mb-6">
-        <h1 className="text-3xl font-bold text-yellow-400">EXPERIENCE</h1>
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-yellow-400">EXPERIENCE</h1>
       </div>
 
-      <div
-        data-aos="fade-up"
-        className="space-y-4 gap-10 text-[16px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10"
-      >
+      <div 
+      data-aos="fade-up"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {experiences.map((exp) => (
           <div
             key={exp.id}
-            className="bg-white bg-opacity-20 p-6 rounded-lg shadow-lg flex flex-col backdrop-filter backdrop-blur-lg"
+            className="bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition  border border-yellow-400 transform  duration-500 hover:scale-105"
+            data-aos="fade-up"
           >
-            <div
-              data-aos="fade-left"
-              className="flex flex-col md:flex-row md:items-center md:space-x-4"
-            >
-              <p className="text-2xl font-bold text-yellow-400">
-                {exp.companyName}
-              </p>
-            </div>
-            <p
-              data-aos="fade-right"
-              className="mt-2 md:mt-0 md:ml-10 text-gray-300"
-            >
-              {exp.responsibility}
-            </p>
+            <h2 data-aos="fade-left" className="text-2xl font-bold text-yellow-400 mb-4">{exp.companyName}</h2>
+            <ul data-aos="fade-right" className="space-y-3 text-gray-300">
+              {exp.responsibility.split('- ').filter(Boolean).map((point, index) => (
+                <li key={index} className="flex items-start">
+                  <FaCircle className="text-yellow-400 mr-2 mt-1.5 flex-shrink-0" size={8} />
+                  <span>{point.trim()}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>

@@ -6,7 +6,7 @@ import { FiTwitter } from "react-icons/fi";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const Banner = ({ bio, github, linkedin, twitter, profilePic }) => {
+const Banner = ({ bio, github, linkedin, twitter, profilePicture }) => {
   useEffect(() => {
     AOS.init({
       easing: "ease-out-quart",
@@ -46,7 +46,7 @@ const Banner = ({ bio, github, linkedin, twitter, profilePic }) => {
         >
           Welcome To <span className="text-yellow-400">My Website</span>
         </h1>
-        <p data-aos="fade-left" className="text-lg mb-8 max-w-2xl">
+        <p data-aos="fade-left" className="text-lg mb-8 break-words max-w-2xl">
           {bio}
         </p>
         <div className="flex mt-8 gap-4">
@@ -87,11 +87,11 @@ const Banner = ({ bio, github, linkedin, twitter, profilePic }) => {
       </div>
       <img
         data-aos="fade-up"
-        src={profilePic || "default-image-url.jpg"}
+        src={`https://savefiles.org/${profilePicture}?shareable_link=323`}
+        alt={profilePicture}
         width={320}
         height={320}
         className="relative rounded-full border-4 p-1 border-yellow-400 shadow-xl z-10"
-        alt="Profile"
       />
     </div>
   );

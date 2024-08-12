@@ -3,6 +3,16 @@
 import { Link } from "react-router-dom";
 
 const About = ({ about, profilePicture, resumeLink }) => {
+  const handleDownload = () => {
+    // Create an anchor element and trigger a download
+    const link = document.createElement('a');
+    link.href = resumeLink;
+    link.download = resumeLink.split('/').pop(); // Extract filename from URL
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div
       id="About"
@@ -10,11 +20,11 @@ const About = ({ about, profilePicture, resumeLink }) => {
     >
       <img
         data-aos="fade-down"
-        src={profilePicture}
-        width={290}
-        height={290}
+        src={`https://savefiles.org/${profilePicture}?shareable_link=323`}
+        alt={profilePicture}
+        width={320}
+        height={320}
         className="rounded-full border-4 p-1 border-yellow-400 shadow-lg"
-        alt="Profile"
       />
 
       <div className="h-full lg:py-40 flex flex-col justify-center items-center text-white">
@@ -30,12 +40,12 @@ const About = ({ about, profilePicture, resumeLink }) => {
 
         <div className="flex mt-8 gap-2">
           <div className="flex items-center justify-center">
-            <Link
-              to={resumeLink}
+            <button
+              onClick={handleDownload}
               className="shadow-lg hover:shadow-xl text-white bg-gradient-to-r from-yellow-400 to-yellow-500 border-none rounded-lg py-4 px-8 uppercase transition-colors duration-300"
             >
               Resume
-            </Link>
+            </button>
           </div>
         </div>
       </div>

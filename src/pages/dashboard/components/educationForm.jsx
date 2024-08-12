@@ -168,7 +168,7 @@ const EducationForm = () => {
                 <label className="block text-[#C69749] mb-2">Grade</label>
                 <input
                   type="text"
-                  placeholder="Grade"
+                  placeholder='Type "N/A" if not applicable'
                   className="w-full bg-[#000000] text-[#e0e0e0] border border-[#735F32] rounded-lg py-3 px-4 placeholder-[#e0e0e0] focus:outline-none focus:ring-2 focus:ring-[#C69749]"
                   {...register("grade", { required: true })}
                 />

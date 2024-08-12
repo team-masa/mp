@@ -113,7 +113,7 @@ const VolunteeringContent = () => {
       </header>
 
       {showAddForm && (
-        <div className="mb-4 p-4 bg-[#282A3A] rounded">
+        <div className="mb-4 p-4 bg-[#282A3A] break-words rounded">
           <input
             type="text"
             placeholder="Organization"
@@ -129,7 +129,7 @@ const VolunteeringContent = () => {
           <input
             type="text"
             placeholder="Description"
-            className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
+            className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] break-words rounded"
             value={newVolunteering.description}
             onChange={(e) =>
               setNewVolunteering({
@@ -185,7 +185,7 @@ const VolunteeringContent = () => {
           />
           <textarea
             placeholder="Responsibilities"
-            className="w-full mb-2 p-2 bg-[#000000] text-[#e0e0e0] rounded"
+            className="w-full mb-2 p-2 bg-[#000000] break-words text-[#e0e0e0] rounded"
             value={newVolunteering.responsibility}
             onChange={(e) =>
               setNewVolunteering({
@@ -232,7 +232,7 @@ const VolunteeringContent = () => {
         {volunteering?.map((vol) => (
           <div
             key={vol.id}
-            className="border-b border-[#282A3A] py-4 flex items-start justify-between"
+            className="border-b border-[#282A3A] py-4 break-words flex items-start justify-between"
           >
             <div>
               <h3 className="text-lg font-semibold text-[#C69749]">
@@ -242,8 +242,8 @@ const VolunteeringContent = () => {
               <p className="text-xs text-[#e0e0e0]">
                 {formatDate(vol.startDate)} - {formatDate(vol.endDate)}
               </p>
-              <p className="text-sm mt-2 text-[#e0e0e0]">{vol.description}</p>
-              <p className="text-xs mt-1 text-[#735F32]">
+              <p className="break-words text-sm mt-2 text-[#e0e0e0]">{vol.description}</p>
+              <p className="text-xs break-words mt-1 text-[#735F32]">
                 Skills: {vol.skills}
               </p>
               <p className="text-xs mt-1 text-[#735F32]">
