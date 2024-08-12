@@ -16,7 +16,6 @@ const Profile = () => {
   });
 
   const [profilePicture, setProfilePicture] = useState(null);
-  const [resumeFile, setResumeFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [profileData, setProfileData] = useState();
@@ -58,15 +57,14 @@ const Profile = () => {
       if (profilePicture instanceof File) {
         formData.append("profilePicture", profilePicture);
       }
-      if (resumeFile) {
-        formData.append("resume", resumeFile);
-      }
       formData.append("location", data.location);
       formData.append("maritalStatus", data.maritalStatus);
       formData.append("sex", data.sex);
       formData.append("bio", data.bio);
       formData.append("about", data.about);
       formData.append("contact", data.contact);
+      formData.append("resume", data.resume);
+
 
       const languagesArray = data.languages
         .split(",")
@@ -189,13 +187,13 @@ const Profile = () => {
             />
           </div>
           <div>
-            <label className="block text-[#C69749] mb-2">Resume</label>
+            <label className="block text-[#C69749] mb-2">Resume Link</label>
             <input
-              type="file"
+              type="url"
               id="resume"
-              accept=".pdf,.docx,.doc"
-              onChange={(e) => setResumeFile(e.target.files[0])}
               className="w-full p-2 border border-[#C69749] rounded bg-[#282A3A] text-white"
+              {...register("resume")}
+              placeholder="Enter the link to your resume"
             />
           </div>
           <div>

@@ -1,25 +1,16 @@
 /* eslint-disable react/prop-types */
-
 import { Link } from "react-router-dom";
 
 const About = ({ about, profilePicture, resume }) => {
-  const handleDownload = () => {
+  const handleResumeClick = (e) => {
+    e.preventDefault();
     if (!resume) {
       console.error("Resume URL is not provided.");
       return;
     }
-
-    // Create an anchor element and trigger a download
-    const link = document.createElement('a');
-    link.href = resume;
-    link.download = resume.split('/').pop(); // Extract filename from URL
-    document.body.appendChild(link);
-
-    // Trigger the download
-    link.click();
     
-    // Clean up and remove the link
-    document.body.removeChild(link);
+    // Open the resume link in a new tab
+    window.open(resume, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -49,13 +40,14 @@ const About = ({ about, profilePicture, resume }) => {
 
         <div className="flex mt-8 gap-2">
           <div className="flex items-center justify-center">
-            <button
-              onClick={handleDownload}
+            <Link
+              to={resume}
+              onClick={handleResumeClick}
               id="resume"
               className="shadow-lg hover:shadow-xl text-white bg-gradient-to-r from-yellow-400 to-yellow-500 border-none rounded-lg py-4 px-8 uppercase transition-colors duration-300"
             >
               Resume
-            </button>
+            </Link>
           </div>
         </div>
       </div>
