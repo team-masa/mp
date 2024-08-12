@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { FaGithub, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 const Footer = ({
   bio,
@@ -9,7 +9,7 @@ const Footer = ({
   githubLink,
   twitterLink,
   linkedinLink,
-  services = [], // Adding services as a prop with default empty array
+  services = [],
 }) => {
   return (
     <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white lg:px-48 px-4 py-20">
@@ -84,14 +84,7 @@ const Footer = ({
             >
               <FaTwitter />
             </a>
-            <a
-              className="text-white hover:text-yellow-400 transition-all duration-150 ease-in-out"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaInstagram />
-            </a>
+            
           </div>
         </div>
       </div>
