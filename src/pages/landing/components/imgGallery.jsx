@@ -6,10 +6,38 @@ import MayImg from "../../../assets/images/may.jpg";
 import AbImg from "../../../assets/images/abena.jpg";
 
 const projects = [
-  { id: 1, title: "Aaron", role: "FULLSTACK DEVELOPER", year: 2021, image: AaronImg },
-  { id: 3, title: "Sarah", role: "BACKEND DEVELOPER", year: 2019, image: SallyImg },
-  { id: 2, title: "Mabel", role: "WEBSITE & DESIGN SYSTEM", year: 2021, image: MayImg },
-  { id: 4, title: "Abena", role: "UI DESIGN", year: 2022, image: AbImg },
+  { 
+    id: 1, 
+    title: "Aaron", 
+    role: "FULLSTACK DEVELOPER", 
+    year: 2021, 
+    image: AaronImg,
+    previewUrl: "/preview/aaronportuphy"
+  },
+  { 
+    id: 2, 
+    title: "Sarah", 
+    role: "BACKEND DEVELOPER", 
+    year: 2019, 
+    image: SallyImg,
+    previewUrl: "/preview/Sarah@360"
+  },
+  { 
+    id: 3, 
+    title: "Mabel", 
+    role: "WEBSITE & DESIGN SYSTEM", 
+    year: 2021, 
+    image: MayImg,
+    previewUrl: "/preview/Maybell"
+  },
+  { 
+    id: 4, 
+    title: "Abena", 
+    role: "UI DESIGN", 
+    year: 2022, 
+    image: AbImg,
+    previewUrl: "/preview/ACorletey"
+  },
 ];
 
 const ImageGallery = () => {
@@ -38,8 +66,8 @@ const ImageGallery = () => {
   }, []);
 
   return (
-    <div 
-      ref={galleryRef} 
+    <div
+      ref={galleryRef}
       className="h-full overflow-y-scroll snap-y snap-mandatory bg-[#282A3A]"
     >
       {projects.map((project, index) => {
@@ -48,17 +76,27 @@ const ImageGallery = () => {
         const isNext = index === activeIndex + 1;
 
         return (
-          <div key={project.id} className="h-screen snap-start flex items-center justify-center relative">
-            <div className={`transition-all duration-500 ease-in-out ${
-              isActive ? 'opacity-100 scale-100' :
-              isPrev ? 'opacity-50 scale-95 translate-y-1/4' :
-              isNext ? 'opacity-50 scale-95 -translate-y-1/4' :
-              'opacity-0 scale-90'
-            }`}>
+          <div 
+            key={project.id} 
+            className="h-screen snap-start flex items-center justify-center relative"
+          >
+            <div 
+              className={`transition-all duration-500 ease-in-out ${
+                isActive ? 'opacity-100 scale-100' :
+                isPrev ? 'opacity-50 scale-95 translate-y-1/4' :
+                isNext ? 'opacity-50 scale-95 -translate-y-1/4' :
+                'opacity-0 scale-90'
+              }`}
+            >
               <div className="flex items-center justify-between px-16 max-w-6xl mx-auto">
-                <h2 className="text-6xl font-serif w-1/3 text-[#C69749]">{project.title}</h2>
+                <h2 className="text-6xl font-serif w-1/3 text-[#C69749]">
+                  {project.title}
+                </h2>
                 <div className="w-1/2 relative">
-                  <Link to={"/preview/mabel"}>
+                  <Link 
+                    to={project.previewUrl}
+                    className="block overflow-hidden"
+                  >
                     <img
                       src={project.image}
                       alt={project.title}
